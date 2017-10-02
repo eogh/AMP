@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Random Mission</title>
+</head>
+    
+<body>
+    <div class="container">
+        <div id="header"></div>
+       
+        <div id="title">Random Mission</div>
+        
+        <div id="card0">
+            <div class="front"><div>누가</div></div>
+            <div class="back"><div id="people">아래에 버튼을 눌러 추가하세요</div></div>
+        </div>
+            
+        <div class="row center-block">
+            <div id="card1" class="cardClass">
+                <div class="front"><div>어디서</div></div>
+                <div class="back"><div id="where"></div></div>
+            </div>
+        
+            <div id="card2" class="cardClass"> 
+                <div class="front"><div>무엇을</div></div> 
+                <div class="back"><div id="what"></div></div>
+            </div>
+        
+            <div id="card3" class="cardClass"> 
+                <div class="front"><div>어떻게</div></div> 
+                <div class="back"><div id="how"></div></div>
+            </div>
+        </div>
+        
+        <div id="setup"><span id ="setup-icon" class="glyphicon glyphicon-chevron-down"></span></div>
+        <div id="setup-people">
+            <button id="name-add" class="btn btn-default">check</button>
+            <button id="name-close" class="btn btn-default">Add</button>
+            <label>check 버튼을 눌러 확인 후 Add 버튼으로 추가해주세요</label>
+            <textarea id="name-input" class="form-control" rows="3" placeholder="ex) 홍길동,홍길동,홍길동,홍길동 과 같이 띄어쓰기 없이 쉼표(,)만 넣어주세요"></textarea>
+            <div id="name-area"></div>
+        </div>
+        <div id="footer">Random Mission v 1.0</div>
+        
+    </div>
+    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+</body>
+    
+</html>

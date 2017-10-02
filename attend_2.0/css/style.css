@@ -1,0 +1,178 @@
+body{
+    background-color: cornflowerblue;
+}
+
+.selectPartPopup{
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding: 200px 16% 0px 16%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#selectPartTitle{
+    text-align: center;
+    color: white;
+}
+
+/* wd-popup setting */
+.wd-popup{
+    display: none;
+    z-index: 3;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.wd-popup-container{
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    background-color: white;
+    box-shadow: 1px 1px 1px #111111;
+}
+.wd-popup-header{
+    padding: 20px;
+    text-align: right;
+}
+#wd-popup-form{
+    width: 50%;
+    float: left;
+}
+#wd-popup-input{
+    height:46px;
+}
+.wd-title{
+    text-align: center;
+    float: left;
+    line-height: 46px;
+    font-size: 35px;
+    margin-right: 20px;
+}
+.wd-popup-divider{
+    background-color: gray;
+    height: 2px;
+    margin: 0px 10px;
+}
+.wd-popup-body{
+    margin: 20px 5%;
+}
+.wd-list{
+    background-color: cornflowerblue;
+    height: 70px;
+    border-style: solid;
+    border-color: white;
+    margin-bottom: 5px;
+    font-size: 1.5vw;
+    color: white;
+    line-height: 70px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #111111;
+}
+
+#searchBar{
+    width: 275px;
+    float: right;
+}
+
+.navbar{
+    margin-top: 20px;
+}
+
+.deleteBtn{
+    margin-left: 10px;
+}
+
+.row{
+    margin:0px;
+}
+
+.toggle-row{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.sex{
+    margin: 5px;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+}
+
+.listGroup{
+    width: 100%;
+    margin: 30px 0px 10px 0px;
+    float: left;
+    font-size: 30px;
+    color: white;
+}
+
+.attendInfo{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 5px;
+    top: 5px;
+}
+
+.sortGruop{
+    margin-top: 30px;
+    width:139px;
+}
+
+.list{
+    padding-left: 0px;
+    padding-right: 1px;
+    margin-bottom: 1px;
+    height: 50px;
+    background-color: rgba(0,0,0,0);
+    line-height: 50px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+}
+
+.taskItem{
+    float: left;
+}
+
+#saveBtn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 2px 2px 5px #114411;
+}
+
+#footer{
+    height: 100px;
+    width: 100%;
+}
+
+/* circle btn */
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}

@@ -1,0 +1,60 @@
+.table-title{
+    padding: 0px;
+    text-align: center;
+}
+
+.table-list{
+    height: 130px;
+    text-align: right;
+}
+
+#header{
+    height: 80px;
+    line-height: 80px;
+}
+.header-left{
+    float: left;
+    position: relative;
+}
+
+.header-center{
+    /*display: inline-block;*/
+    position: absolute;
+    left: 46%;
+}
+
+.header-right{
+    position: relative;
+    float: right;
+}
+
+td:hover{
+    background-color: deepskyblue;
+}
+
+td:active{
+    background-color: cornflowerblue;
+}
+
+.table-list{
+    width: 134px;
+}
+
+li{
+    background-color: red;
+    padding-right: 10px;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    font-family: monospace;
+    margin: 2px 0px;
+}
+
+.date-num{
+    font-size: 15px;
+}
+
+#popup{
+    background-color: rgba(0,0,0,0.4);
+    top: 0px;
+    height: 700px;
+}

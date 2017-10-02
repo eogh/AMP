@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <script data-require="angular.js@1.5.8" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.15/angular-filter.js"></script>
+    <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.js"></script>
+    <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="js/angular-long-press.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+    <title>Attend SNJI</title>
+</head>
+    
+<body ng-app="todoapp">
+    <div ng-controller="TodomvcCtrl">
+        
+        <!--start popup-->
+        <div class="selectPartPopup" ng-hide="isPeopleData">
+            <h2 id="selectPartTitle">SELECT PART</h2>
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getPeopleData(1)">우리공동체</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getPeopleData(2)">모두공동체</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getPeopleData(3)">함께공동체</button>
+        </div>
+        
+        <!-- woori dori program-->
+        <div class="wd-popup">
+            <div class="wd-popup-container">
+                <div class="wd-popup-header">
+                    <span class="wd-title">우리두리</span>
+                    <span><form id="wd-popup-form"><input type="text" class="form-control" id="wd-popup-input" ng-model="nameArrVal" placeholder="ex)이름,이름,이름 과 같이 입력하세요"></form></span>
+                    <span class="wd-refresh-btn"><button type="button" class="btn btn-lg btn-default" ng-click="wooriReloadBtn(attendData)">새로고침</button></span>
+                    <span class="wd-cancel-btn"><button type="button" class="btn btn-lg btn-default" ng-click="wooriCancelBtn()">닫기</button></span>
+                </div>
+                <div class="wd-popup-divider"></div>
+                <div class="wd-popup-body"></div>
+            </div>
+        </div>
+        
+    <div class="container">
+        
+        <!-- navbar -->
+        <!-- navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" id="main-title" href="#">Attend</a> </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown" ng-click="getDateData()">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">불러오기</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-click="createAttendData(tasks, (nowDate | date:'yyyy-MM-dd'))"><a href="#">새로만들기</a></li>
+                                <li ng-repeat="date in dateData"><a href="#"><span ng-click="selectAttendData(date.date, part)">{{date.date | getDay}}</span><span class="glyphicon glyphicon-remove deleteBtn" ng-click="dropAttendData(date.date)" ng-hide="{{date.date | isGetDay}}"></span></a></li>
+                            </ul>
+                            <!--
+                            <ul class="dropdown-menu" role="menu" ng-repeat="date in dateData">
+                                <li><a href="#" ng-click="selectAttendData(date.date, part)">{{date.date}}<span class="glyphicon glyphicon-remove deleteBtn" ng-click="dropAttendData(date.date)"></span></a></li>
+                            </ul>-->
+                        </li>
+                        <li ng-click="updateAttendData(attendData)" ng-class="{disabled: !isAttendData}"><a href="#">저장하기</a></li>
+                        <li data-toggle="modal" data-target="#myModal" ng-click="getCounter(attendData)" ng-class="{disabled: !isAttendData}"><a href="#">통계</a></li>
+                        <li ng-click="wooriBtn()" ng-class="{disabled: !isAttendData}"><a href="#">우리두리(PC)</a></li>
+                        <li ng-click="JsonToCVS(attendData,'Attend',true)" ng-class="{disabled: !isAttendData}"><a href="#">엑셀 다운로드(PC)</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="searchText" placeholder="검색하세요 ex)이름, 마을">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        
+        <!-- Modal Popup -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">통계</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>남자</th>
+                                <th>여자</th>
+                                <th>합계</th>
+                            </tr>
+                            <tr>
+                                <th>예배</th>
+                                <th>{{count11}}</th>
+                                <th>{{count21}}</th>
+                                <th>{{count11+count21}}</th>
+                            </tr>
+                            <tr>
+                                <th>모임</th>
+                                <th>{{count12}}</th>
+                                <th>{{count22}}</th>
+                                <th>{{count12+count22}}</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="baba" class="btn btn-default" data-dismiss="modal">Copy to clipboard</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+        <div class="btn-group center-block sortGruop" data-toggle="buttons" ng-show="isAttendData">
+            <button type="button" class="btn btn-default btn-lg" ng-class="{true: 'btn-primary', false: 'btn-default'}[!toggleBtn]" ng-click="toggleFunc(false)">예배</button>
+            <button type="button" class="btn btn-default btn-lg" ng-class="{true: 'btn-primary', false: 'btn-default'}[toggleBtn]" ng-click="toggleFunc(true)">모임</button>
+        </div>
+        
+        
+        
+        <!-- Data table 1 -->
+        <div class="row" ng-hide="toggleBtn">
+            <div ng-repeat="(key, value) in attendData | groupBy: 'group'">
+                <div class="listGroup">{{ key }}_예배</div>
+                <div class="col-xs-2 col-sm-2 col-md-1 list" ng-repeat="attend in value | filter:searchText | orderBy:'name'" ng-click="checkView1(attend)" on-long-press="longPressInfo(attend)">
+                    <div id="item_{{attend.id}}" ng-style="{{attend.check1}} && {'background-color':'rgba(0,0,0,0.5)'} || {'background-color':'rgba(0,0,0,0.1)'}">
+                        <div class="sex"></div>
+                    <p>{{attend.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data table 2 -->
+        <div class="row" ng-show="toggleBtn">
+            <div ng-repeat="(key, value) in attendData | groupBy: 'group'">
+                <div class="listGroup">{{ key }}_모임</div>
+                <div class="col-xs-2 col-sm-2 col-md-1 list" ng-repeat="attend in value | filter:searchText | orderBy:'name'" ng-click="checkView2(attend)" on-long-press="longPressInfo(attend)">
+                    <div id="item2_{{attend.id}}" ng-style="{{attend.check2}} && {'background-color':'rgba(0,0,0,0.5)'} || {'background-color':'rgba(0,0,0,0.1)'}">
+                    {{attend.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" id="saveBtn" class="btn btn-success btn-circle btn-xl" ng-click="updateAttendData(attendData)" ng-show="isAttendData"><i class="glyphicon glyphicon-plus"></i></button>
+        
+        <!--<div ng-repeat="attend in attendData | filter: { check2 : 1}">{{attend.name}}</div>-->
+        <!--<button type="button" id="saveBtn" class="btn btn-default" ng-click="updateAttendData(attendData)" ng-show="isAttendData">저장</button>-->
+        <!-- test
+        {{tasks}}
+        {{attendData}}
+        {{dateData}}
+        -->
+    </div>
+    <div id="footer"></div>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script src="js/TodomvcController.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+    
+</html>

@@ -1,0 +1,79 @@
+body{
+    background-color: dodgerblue;
+    color:white;
+}
+
+#header{
+    height: 46px;
+    margin-top: 20px;
+}
+#header-setup{
+    float: right;
+}
+#title{
+    margin-top: 50px;
+    margin-bottom: 150px;
+    font-size: 10rem;
+    text-align: center;
+}
+#people{
+    font-weight: 600;
+}
+.row{
+    width: 1140px;
+}
+#card0{
+    width: 1060px;
+    height: 150px;
+    line-height: 150px;
+    border-style: solid;
+    text-align: center;
+    font-size: 5rem;
+    margin: 40px;
+}
+.cardClass{
+    width: 300px;
+    height: 150px;
+    line-height: 150px;
+    border-style: solid;
+    text-align: center;
+    font-size: 6rem;
+    float: left;
+    margin: 40px;
+}
+.front{
+}
+.back{
+    font-weight: 700;
+}
+
+#name-area{
+    
+}
+.name-area-item{
+    width:100px;
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+    border-style: solid;
+    margin: 10px;
+    font-size: 2rem;
+    float: left;
+}
+#setup{
+    text-align: center;
+}
+#setup-people{
+    display: none;
+}
+#name-add{
+    margin: 10px 5px;
+}
+#name-close{
+    margin: 10px 5px;
+}
+#footer{
+    position: fixed;
+    bottom: 0px;
+    margin: 10px auto;
+}
