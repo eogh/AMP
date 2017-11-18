@@ -45,10 +45,10 @@ var gameCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 window.onload = function () {
     
-    var windowWidth = window.innerWidth - 100; //dev
-    var windowHeight = window.innerHeight - 100; //dev
-//    var windowWidth = window.outerWidth;
-//    var windowHeight = window.outerHeight;
+//    var windowWidth = window.innerWidth - 100; //dev
+//    var windowHeight = window.innerHeight - 100; //dev
+    var windowWidth = window.outerWidth - 100;
+    var windowHeight = window.outerHeight - 100;
     
     $(".toast").css("width",windowWidth/2);
     $(".toast").css("height",windowHeight/3);
