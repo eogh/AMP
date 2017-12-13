@@ -1,54 +1,95 @@
-.table-title{
-    padding: 0px;
+.header{
+    position: fixed;
+    background-color: white;
+    width: calc(100% - 30px);
+    border-bottom: 1px solid #999;
     text-align: center;
 }
 
-.table-list{
-    height: 130px;
-    text-align: right;
-}
-
-#header{
-    height: 80px;
-    line-height: 80px;
-}
-.header-left{
+.headerLBtn{
     float: left;
-    position: relative;
+    font-size: 17px;
+    color: black;
+    line-height: 63px;
+    padding: 0px 10px;
+}
+.headerLBtn:active{
+    color: coral;
 }
 
-.header-center{
-    /*display: inline-block;*/
-    position: absolute;
-    left: 46%;
-}
-
-.header-right{
-    position: relative;
+.headerRBtn{
     float: right;
+    font-size: 17px;
+    color: black;
+    line-height: 63px;
+    padding: 0px 10px;
+}
+.headerRBtn:active{
+    color: coral;
 }
 
-td:hover{
-    background-color: deepskyblue;
+.coldStart{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: none;
 }
 
-td:active{
-    background-color: cornflowerblue;
+
+/********** emotionListView **********/
+#emotionList{
+    margin-top: 70px;
+}
+.elist{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: white;
+}
+.elist:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.elist:active {
+    background-color: rgba(0,0,0,0.2);
 }
 
-.table-list{
-    width: 134px;
+
+/********** desireListView **********/
+#desireList{
+    margin-top: 70px;
+}
+.dlist{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: white;
+}
+.dlist:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.dlist:active {
+    background-color: rgba(0,0,0,0.2);
 }
 
-li{
-    background-color: red;
-    padding-right: 10px;
-    border-radius: 5px 5px 5px 5px;
-    color: white;
-    font-family: monospace;
-    margin: 2px 0px;
-}
 
-.date-num{
-    font-size: 15px;
+/********** desireListView **********/
+#resultList{
+    margin-top: 70px;
+}
+.cardHeight{
+    
+}
+.rlist{
+    height: calc(100% - 10px);
+    font-size: 20px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 25px;
+    box-shadow: 1px 1px #aaa;
 }

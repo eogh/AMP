@@ -54,3 +54,7 @@ var makeResultList = function() {
     $(".rlist").css("line-height","331px");
 }
 
+var selectItem = function() {
+    
+    console.log("select Item");
+}
