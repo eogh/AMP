@@ -49,9 +49,11 @@
     border-bottom: 1px solid #eee;
     background-color: white;
 }
+/*
 .elist:hover {
     background-color: rgba(0,0,0,0.2);
 }
+*/
 .elist:active {
     background-color: rgba(0,0,0,0.2);
 }
@@ -69,9 +71,11 @@
     border-bottom: 1px solid #eee;
     background-color: white;
 }
+/*
 .dlist:hover {
     background-color: rgba(0,0,0,0.2);
 }
+*/
 .dlist:active {
     background-color: rgba(0,0,0,0.2);
 }

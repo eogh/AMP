@@ -13,7 +13,7 @@ var list = {
     desire : ["봉사", "친밀한 관계", "유대", "소통", "연결", "배려", "존중", "상호성", "공감", "이해", "수용", "지지", "협력",
               "도움", "감사", "인정", "승인", "사랑", "애정", "관심", "호감", "우정", "가까움", "나눔", "소속감", "공동체",
               "안도", "위안", "신뢰", "확신", "예측가능성", "정서적 안전", "자기 보호", "일관성", "안정성"],
-    result : ["신뢰", "확신", "예측가능성", "정서적 안전"]
+    result : []
 }
 
 var makeEmotionList = function() {
@@ -22,7 +22,7 @@ var makeEmotionList = function() {
     
     console.log("list.emotion.length = "+list.emotion.length);
     for(var i=0; i < list.emotion.length; i++) {
-        emotionDiv += '<div class="elist">'+list.emotion[i]+'</div>';
+        emotionDiv += '<div class="elist" id="elist_'+i+'" onclick="selectItem(\'' +  list.emotion[i] + '\', \'' + list.emotion[i] + '\')">'+list.emotion[i]+'</div>';
     }
     
     $("#emotionList").append(emotionDiv);
@@ -34,7 +34,7 @@ var makeDesireList = function() {
     
     console.log("list.desire.length = "+list.desire.length);
     for(var i=0; i < list.desire.length; i++) {
-        desireDiv += '<div class="dlist">'+list.desire[i]+'</div>';
+        desireDiv += '<div class="dlist" id="dlist_'+i+'" onclick="selectItem(\'' +  list.desire[i] + '\', \'' + list.desire[i] + '\')">'+list.desire[i]+'</div>';
     }
     
     $("#desireList").append(desireDiv);
@@ -44,6 +44,8 @@ var makeResultList = function() {
     
     var resultDiv = "";
     
+    console.log("list.result.length = "+list.result.length);
+    console.log("list.result = "+JSON.stringify(list.result));
     for(var i=0; i < list.result.length; i++) {        
         resultDiv += '<div class="col-xs-6 col-sm-3 col-md-2 cardHeight"><div class="rlist">'+list.result[i]+'</div></div>';
     }
@@ -54,7 +56,14 @@ var makeResultList = function() {
     $(".rlist").css("line-height","331px");
 }
 
-var selectItem = function() {
+var selectItem = function(item) {
     
-    console.log("select Item");
+    console.log("select Item = "+item);
+    
+    if(list.result.length < 4) {
+        list.result.push(item);
+    } else {
+        console.log("no more select Item");
+        console.log("list.result = "+JSON.stringify(list.result));
+    }
 }
