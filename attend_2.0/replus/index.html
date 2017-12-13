@@ -12,9 +12,37 @@
 <body>
     <div class="container">
         
-        <button type="button" class="btn btn-default" id="emotionBtn" onClick="location.href='./view/emotionListView.html'">감정목록</button>
-        <button type="button" class="btn btn-default" id="desireBtn" onClick="location.href='./view/desireListView.html'">욕구목록</button>
+        <div class="viewClass" id="mainView">
+            <button type="button" class="btn btn-default" id="emotionBtn" onClick="showScreen('emotionView')">감정목록</button>
+            <button type="button" class="btn btn-default" id="desireBtn" onClick="showScreen('desireView')">욕구목록</button>
+        </div>
+
+        <div class="viewClass" id="emotionView">
+            <div class="header">
+                <div class="headerLBtn" onClick="showScreen('mainView')">이전</div>
+                <div class="headerRBtn" onClick="showScreen('resultView')">선택</div>
+                <h2>감정목록</h2>
+            </div>
+            <div id="emotionList"></div>
+        </div>
         
+        <div class="viewClass" id="desireView">
+            <div class="header">
+                <div class="headerLBtn" onClick="showScreen('mainView')">이전</div>
+                <div class="headerRBtn" onClick="showScreen('resultView')">선택</div>
+                <h2>욕구목록</h2>
+            </div>
+            <div id="desireList"></div>
+        </div>
+        
+        <div class="viewClass" id="resultView">
+            <div class="header">
+                <div class="headerLBtn" onClick="showScreen('emotionView')">뒤로</div>
+                <div class="headerRBtn" onClick="showScreen('mainView')">확인</div>
+                <h2>지금의 감정</h2>
+            </div>
+            <div class="row" id="resultList"></div>
+        </div>
     </div>
     <div class="coldStart"></div>
     

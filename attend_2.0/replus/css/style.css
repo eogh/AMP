@@ -28,6 +28,10 @@
     color: coral;
 }
 
+.viewClass{
+    position: absolute;
+}
+
 .coldStart{
     position: absolute;
     width: 100%;

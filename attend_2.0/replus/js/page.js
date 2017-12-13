@@ -1,8 +1,8 @@
 window.onload = function () {
-//    kCalendar('kCalendar');
     makeEmotionList();
     makeDesireList();
-    makeResultList();
+    
+    showScreen("mainView");
 };
 
 var list = {
@@ -54,6 +54,8 @@ var makeResultList = function() {
     
     $(".cardHeight").css("height","331px");
     $(".rlist").css("line-height","331px");
+    
+    list.result = [];//초기화
 }
 
 var selectItem = function(item) {
@@ -65,5 +67,20 @@ var selectItem = function(item) {
     } else {
         console.log("no more select Item");
         console.log("list.result = "+JSON.stringify(list.result));
+    }
+}
+
+var showScreen = function(screen) {
+    $("#mainView").css("display","none");
+    $("#desireView").css("display","none");
+    $("#emotionView").css("display","none");
+    $("#resultView").css("display","none");
+    
+    $("#"+screen).css("display","block");
+    
+    if(screen == "resultView") {
+        makeResultList();
+    } else {
+        $("#resultList").empty(); //back시에만 해주는 것으로 바꾸기
     }
 }
