@@ -6,7 +6,7 @@ window.onload = function () {
 	setTimeout(function() {
 		showScreen("mainView");
 		
-	},3000);
+	},300);
 };
 
 var list = {
@@ -26,7 +26,7 @@ var makeEmotionList = function() {
     
     console.log("list.emotion.length = "+list.emotion.length);
     for(var i=0; i < list.emotion.length; i++) {
-        emotionDiv += '<div class="elist" id="elist_'+i+'" onclick="selectItem(\'' +  list.emotion[i] + '\', \'' + list.emotion[i] + '\')">'+list.emotion[i]+'</div>';
+        emotionDiv += '<div class="col-xs-12 elist" id="elist_'+i+'" onclick="selectItem(\'' +  list.emotion[i] + '\', \'' + list.emotion[i] + '\')">'+list.emotion[i]+'</div>';
     }
     
     $("#emotionList").append(emotionDiv);
@@ -38,7 +38,7 @@ var makeDesireList = function() {
     
     console.log("list.desire.length = "+list.desire.length);
     for(var i=0; i < list.desire.length; i++) {
-        desireDiv += '<div class="dlist" id="dlist_'+i+'" onclick="selectItem(\'' +  list.desire[i] + '\', \'' + list.desire[i] + '\')">'+list.desire[i]+'</div>';
+        desireDiv += '<div class="col-xs-12 dlist" id="dlist_'+i+'" onclick="selectItem(\'' +  list.desire[i] + '\', \'' + list.desire[i] + '\')">'+list.desire[i]+'</div>';
     }
     
     $("#desireList").append(desireDiv);
@@ -51,7 +51,7 @@ var makeResultList = function() {
     console.log("list.result.length = "+list.result.length);
     console.log("list.result = "+JSON.stringify(list.result));
     for(var i=0; i < list.result.length; i++) {        
-        resultDiv += '<div class="col-xs-6 col-sm-3 col-md-2 cardHeight"><div class="rlist">'+list.result[i]+'</div></div>';
+        resultDiv += '<div class="col-xs-6 col-md-3 cardHeight"><div class="rlist">'+list.result[i]+'</div></div>';
     }
     
     $("#resultList").append(resultDiv);

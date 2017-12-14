@@ -1,57 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>REPLUS - HUMAN LAB</title>
 </head>
     
 <body>
-    <div class="container">
+    <div class="container-fluid">
         
 		<div class="viewClass" id="coldStart">
 			<h1>coldStart</h1>
 		</div>
 		
         <div class="viewClass" id="mainView">
-            <button type="button" class="btn btn-default" id="emotionBtn" onClick="showScreen('emotionView')">감정목록</button>
-            <button type="button" class="btn btn-default" id="desireBtn" onClick="showScreen('desireView')">욕구목록</button>
+            <img src="/res/bono.png" alt="..." class="img-rounded">
+            <h1>Title</h1>
+            <button type="button" class="btn btn-default btn-lg btn-block" id="emotionBtn" onClick="showScreen('emotionView')">감정목록</button>
+            <button type="button" class="btn btn-default btn-lg btn-block" id="desireBtn" onClick="showScreen('desireView')">욕구목록</button>
         </div>
 
         <div class="viewClass" id="emotionView">
             <div class="header">
-                <div class="headerLBtn" onClick="showScreen('mainView')">이전</div>
-                <div class="headerRBtn" onClick="showScreen('resultView')">선택</div>
                 <h2>감정목록</h2>
             </div>
-            <div id="emotionList"></div>
+            
+            <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
+            <button type="button" class="btn btn-default rBtn" onClick="showScreen('resultView')">선택</button>
+            
+            <div id="emotionList"></div>  
         </div>
         
         <div class="viewClass" id="desireView">
             <div class="header">
-                <div class="headerLBtn" onClick="showScreen('mainView')">이전</div>
-                <div class="headerRBtn" onClick="showScreen('resultView')">선택</div>
                 <h2>욕구목록</h2>
             </div>
+            
+            <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
+            <button type="button" class="btn btn-default rBtn" onClick="showScreen('resultView')">선택</button>
+            
             <div id="desireList"></div>
         </div>
         
         <div class="viewClass" id="resultView">
             <div class="header">
-                <div class="headerLBtn" onClick="showScreen('emotionView')">뒤로</div>
-                <div class="headerRBtn" onClick="showScreen('mainView')">확인</div>
                 <h2>지금의 감정</h2>
             </div>
-            <div class="row" id="resultList"></div>
+            
+            <button type="button" class="btn btn-default lBtn" onClick="showScreen('emotionView')">뒤로</button>
+            <button type="button" class="btn btn-default rBtn" onClick="showScreen('mainView')">확인</button>
+            
+            <div id="resultList"></div>
         </div>
     </div>
     
-    <script src="js/page.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="js/page.js"></script>
 </body>
     
 </html>

@@ -1,31 +1,31 @@
+.container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .header{
     position: fixed;
     background-color: white;
-    width: calc(100% - 30px);
+    width: 100%;
     border-bottom: 1px solid #999;
     text-align: center;
+    z-index: 10;
 }
 
-.headerLBtn{
-    float: left;
-    font-size: 17px;
-    color: black;
-    line-height: 63px;
-    padding: 0px 10px;
-}
-.headerLBtn:active{
-    color: coral;
+.lBtn{
+    position: fixed;
+    left: 0px;
+    margin-top: 15px;
+    margin-left: 15px;
+    z-index: 20;
 }
 
-.headerRBtn{
-    float: right;
-    font-size: 17px;
-    color: black;
-    line-height: 63px;
-    padding: 0px 10px;
-}
-.headerRBtn:active{
-    color: coral;
+.rBtn{
+    position: fixed;
+    right: 0px;
+    margin-top: 15px;
+    margin-right: 15px;
+    z-index: 20;
 }
 
 .viewClass{
@@ -47,20 +47,10 @@
 .elist{
     height: 50px;
     line-height: 50px;
-    padding-left: 10px;
     font-size: 20px;
     border-bottom: 1px solid #eee;
     background-color: white;
 }
-/*
-.elist:hover {
-    background-color: rgba(0,0,0,0.2);
-}
-*/
-.elist:active {
-    background-color: rgba(0,0,0,0.2);
-}
-
 
 /********** desireListView **********/
 #desireList{
@@ -69,20 +59,10 @@
 .dlist{
     height: 50px;
     line-height: 50px;
-    padding-left: 10px;
     font-size: 20px;
     border-bottom: 1px solid #eee;
     background-color: white;
 }
-/*
-.dlist:hover {
-    background-color: rgba(0,0,0,0.2);
-}
-*/
-.dlist:active {
-    background-color: rgba(0,0,0,0.2);
-}
-
 
 /********** desireListView **********/
 #resultList{
@@ -92,7 +72,6 @@
     
 }
 .rlist{
-    height: calc(100% - 10px);
     font-size: 20px;
     text-align: center;
     background-color: white;
