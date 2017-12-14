@@ -2,7 +2,11 @@ window.onload = function () {
     makeEmotionList();
     makeDesireList();
     
-    showScreen("mainView");
+	showScreen("coldStart"); //처음진입시 coldstart 화면 3초 유지
+	setTimeout(function() {
+		showScreen("mainView");
+		
+	},3000);
 };
 
 var list = {
@@ -75,6 +79,7 @@ var showScreen = function(screen) {
     $("#desireView").css("display","none");
     $("#emotionView").css("display","none");
     $("#resultView").css("display","none");
+    $("#coldStart").css("display","none");
     
     $("#"+screen).css("display","block");
     
