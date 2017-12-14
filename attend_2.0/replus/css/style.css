@@ -1,3 +1,4 @@
+/********** common CSS **********/
 .container-fluid{
     padding-left: 0px;
     padding-right: 0px;
@@ -32,6 +33,11 @@
     position: absolute;
 }
 
+.list-press{
+    background-color: darkgray;
+}
+
+/********** coldStartView **********/
 #coldStart{
     width: 100%;
     height: 100%;
@@ -49,7 +55,6 @@
     line-height: 50px;
     font-size: 20px;
     border-bottom: 1px solid #eee;
-    background-color: white;
 }
 
 /********** desireListView **********/
@@ -61,7 +66,6 @@
     line-height: 50px;
     font-size: 20px;
     border-bottom: 1px solid #eee;
-    background-color: white;
 }
 
 /********** desireListView **********/

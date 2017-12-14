@@ -17,7 +17,8 @@ var list = {
     desire : ["봉사", "친밀한 관계", "유대", "소통", "연결", "배려", "존중", "상호성", "공감", "이해", "수용", "지지", "협력",
               "도움", "감사", "인정", "승인", "사랑", "애정", "관심", "호감", "우정", "가까움", "나눔", "소속감", "공동체",
               "안도", "위안", "신뢰", "확신", "예측가능성", "정서적 안전", "자기 보호", "일관성", "안정성"],
-    result : []
+    result : [],
+    div : []
 }
 
 var makeEmotionList = function() {
@@ -26,7 +27,7 @@ var makeEmotionList = function() {
     
     console.log("list.emotion.length = "+list.emotion.length);
     for(var i=0; i < list.emotion.length; i++) {
-        emotionDiv += '<div class="col-xs-12 elist" id="elist_'+i+'" onclick="selectItem(\'' +  list.emotion[i] + '\', \'' + list.emotion[i] + '\')">'+list.emotion[i]+'</div>';
+        emotionDiv += '<div class="col-xs-12 elist" id="elist_'+i+'" onclick="selectItem(\'' +  list.emotion[i] + '\', \'' + 'elist_' + i + '\')">'+list.emotion[i]+'</div>';
     }
     
     $("#emotionList").append(emotionDiv);
@@ -38,7 +39,7 @@ var makeDesireList = function() {
     
     console.log("list.desire.length = "+list.desire.length);
     for(var i=0; i < list.desire.length; i++) {
-        desireDiv += '<div class="col-xs-12 dlist" id="dlist_'+i+'" onclick="selectItem(\'' +  list.desire[i] + '\', \'' + list.desire[i] + '\')">'+list.desire[i]+'</div>';
+        desireDiv += '<div class="col-xs-12 dlist" id="dlist_'+i+'" onclick="selectItem(\'' +  list.desire[i] + '\', \'' + 'dlist_' + i + '\')">'+list.desire[i]+'</div>';
     }
     
     $("#desireList").append(desireDiv);
@@ -59,19 +60,41 @@ var makeResultList = function() {
     $(".cardHeight").css("height","331px");
     $(".rlist").css("line-height","331px");
     
-    list.result = [];//초기화
+    //초기화
+    list.result = [];
+    console.log("list.div.length = "+list.div.length);
+    for(var i=0; i<list.div.length; i++) {
+        console.log("list.div[i] = "+list.div[i]);
+        $("#"+list.div[i]).removeClass("list-press");
+    }
+    list.div = [];
 }
 
-var selectItem = function(item) {
+var selectItem = function(item, div) {
     
     console.log("select Item = "+item);
+    console.log("select div = "+div);
     
-    if(list.result.length < 4) {
-        list.result.push(item);
-    } else {
-        console.log("no more select Item");
-        console.log("list.result = "+JSON.stringify(list.result));
+    if($("#"+div).hasClass("list-press")) //선택 해제
+    {
+        list.result.splice(list.result.indexOf(item),1); //배열에서 삭제
+        list.div.splice(list.div.indexOf(div),1); //배열에서 삭제
+        $("#"+div).removeClass("list-press");
+    } 
+    else //선택 되었을 때
+    { 
+        if(list.result.length < 4) {
+            list.result.push(item); //배열에 추가
+            list.div.push(div); //배열에 추가
+            $("#"+div).addClass("list-press");
+        } else {
+            console.log("no more select Item");
+            
+        }
+        
     }
+    console.log("list.result = "+JSON.stringify(list.result));
+    console.log("list.div = "+JSON.stringify(list.div));
 }
 
 var showScreen = function(screen) {
