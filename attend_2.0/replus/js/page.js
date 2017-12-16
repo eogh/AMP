@@ -6,9 +6,15 @@ window.onload = function () {
 	setTimeout(function() {
 		this.showScreen("mainView");
 		
-	},300);
+	},1000);
 };
 
+//defined
+var _windowWidth = window.innerWidth; //dev
+var _windowHeight = window.innerHeight; //dev
+var _headerHeight = 70;
+
+var _pageHistory = "";
 
 var list = {
     emotion : ["마비가 된 듯한, 경직된","언짢은","억울한","뒤숭숭한","거북스러운","뭉클한","피곤한","흥분되는","긴장된","지겨운","놀란",
@@ -32,8 +38,6 @@ var list = {
     result : [],
     div : []
 }
-var _pageHistory = "";
-
 
 var makeEmotionList = function() {
 
@@ -66,13 +70,28 @@ var makeResultList = function() {
     console.log("list.result.length = "+this.list.result.length);
     console.log("list.result = "+JSON.stringify(this.list.result));
     for(var i=0; i < this.list.result.length; i++) {        
-        resultDiv += '<div class="col-xs-6 col-md-3 cardHeight"><div class="rlist">'+this.list.result[i]+'</div></div>';
+        resultDiv += '<div class="col-xs-6 col-md-3 cardHeight">'
+                    +   '<div class="rlist">'
+                    +       '<div class="outer">'
+                    +           '<div class="inner">'
+                    +               '<div class="centered">'
+                    +                   '<p>'+this.list.result[i]+'</p>'
+                    +                   '<div class="cardImg"></div>'
+                    +                   '<p class="text-flip">'+this.list.result[i]+'</p>'
+                    +               '</div>'
+                    +           '</div>'
+                    +       '</div>'
+                    +   '</div>'
+                    +'</div>';
     }
     
     $("#resultList").append(resultDiv);
     
-    $(".cardHeight").css("height","331px");
-    $(".rlist").css("line-height","331px");
+    //윈도우 사이즈에 맞게 reload
+    var cardHeight = (this._windowHeight - this._headerHeight) / 2;
+    var cardImgMargin = (cardHeight - 180) / 2;
+    $(".cardHeight").css("height",cardHeight+"px");
+    $(".cardImg").css("margin", cardImgMargin+"px auto");
     
     //초기화
     this.list.result = [];
@@ -81,6 +100,7 @@ var makeResultList = function() {
         console.log("list.div[i] = "+this.list.div[i]);
         $("#"+this.list.div[i]).removeClass("list-press");
     }
+    $(".pick").text("선택"); //초기화
     this.list.div = [];
 }
 
@@ -102,11 +122,17 @@ var selectItem = function(item, div) {
             this.list.div.push(div); //배열에 추가
             $("#"+div).addClass("list-press");
         } else {
-            console.log("no more select Item");
-            
+            alert("다 선택 되었습니다.");
         }
         
     }
+    
+    if(list.result.length != 0) { //선택에 따라서 갯수 표시
+        $(".pick").text("선택 "+list.result.length);
+    } else {
+        $(".pick").text("선택");
+    }
+    
     console.log("list.result = "+JSON.stringify(this.list.result));
     console.log("list.div = "+JSON.stringify(this.list.div));
 }
@@ -116,7 +142,7 @@ var goResultView = function() {
 	if(this.list.result.length >= 1){ //한개라도 선택 한 경우
 		this.showScreen('resultView');
 	} else {
-		alert("한개 이상 선택해주세요~");
+		alert("한개 이상 선택해 주세요~");
 	}
 	
 }

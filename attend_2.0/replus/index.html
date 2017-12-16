@@ -14,14 +14,25 @@
     <div class="container-fluid">
         
 		<div class="viewClass" id="coldStart">
-			<h1>coldStart</h1>
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <div id="coldStartImg"></div>
+<!--                        <div src="./res/bono.png" alt="..." class="img-rounded">-->
+                    </div>
+                </div>
+            </div>            
 		</div>
 		
         <div class="viewClass" id="mainView">
-            <img src="./res/bono.png" alt="..." class="img-rounded">
-            <h1>Title</h1>
-            <button type="button" class="btn btn-default btn-lg btn-block" id="emotionBtn" onClick="showScreen('emotionView')">감정목록</button>
-            <button type="button" class="btn btn-default btn-lg btn-block" id="desireBtn" onClick="showScreen('desireView')">욕구목록</button>
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <button type="button" class="btn btn-default btn-lg btn-block" id="emotionBtn" onClick="showScreen('emotionView')">감정목록</button>
+                        <button type="button" class="btn btn-default btn-lg btn-block" id="desireBtn" onClick="showScreen('desireView')">욕구목록</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="viewClass" id="emotionView">
@@ -30,7 +41,7 @@
             </div>
             
             <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
-            <button type="button" class="btn btn-default rBtn" onClick="goResultView('emotionView')">선택</button>
+            <button type="button" class="btn btn-default rBtn pick" onClick="goResultView('emotionView')">선택</button>
             
             <div id="emotionList"></div>  
         </div>
@@ -41,7 +52,7 @@
             </div>
             
             <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
-            <button type="button" class="btn btn-default rBtn" onClick="goResultView('desireView')">선택</button>
+            <button type="button" class="btn btn-default rBtn pick" onClick="goResultView('desireView')">선택</button>
             
             <div id="desireList"></div>
         </div>
