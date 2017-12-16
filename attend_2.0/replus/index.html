@@ -30,7 +30,7 @@
             </div>
             
             <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
-            <button type="button" class="btn btn-default rBtn" onClick="showScreen('resultView')">선택</button>
+            <button type="button" class="btn btn-default rBtn" onClick="goResultView('emotionView')">선택</button>
             
             <div id="emotionList"></div>  
         </div>
@@ -41,7 +41,7 @@
             </div>
             
             <button type="button" class="btn btn-default lBtn" onClick="showScreen('mainView')">이전</button>
-            <button type="button" class="btn btn-default rBtn" onClick="showScreen('resultView')">선택</button>
+            <button type="button" class="btn btn-default rBtn" onClick="goResultView('desireView')">선택</button>
             
             <div id="desireList"></div>
         </div>
@@ -51,7 +51,7 @@
                 <h2>지금의 감정</h2>
             </div>
             
-            <button type="button" class="btn btn-default lBtn" onClick="showScreen('emotionView')">뒤로</button>
+            <button type="button" class="btn btn-default lBtn" onClick="backResultView()">뒤로</button>
             <button type="button" class="btn btn-default rBtn" onClick="showScreen('mainView')">확인</button>
             
             <div id="resultList"></div>
