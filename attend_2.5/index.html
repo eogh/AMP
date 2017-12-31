@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- META SET -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- DATA SET -->
+    <link href="image/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>Attendance Management Program</title>
+</head>
+
+<body ng-app="ampApp" ng-controller="ampCtrl">
+    <div class="container-fluid" ng-init="onload()">
+        
+        
+        <!---- Cold Start View ---->
+        <div class="viewClass" id="coldStart" ng-show="_screen == 'coldStart'">
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <div id="coldStartImg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!---- Main View ---->
+        <div class="viewClass" id="mainView" ng-show="_screen == 'mainView'">mainView</div>
+        
+        
+        <!---- Load View ---->
+        <div class="viewClass" id="loadView" ng-show="_screen == 'loadView'">loadView</div>
+        
+        
+        <!---- Check View ---->
+        <div class="viewClass" id="checkView" ng-show="_screen == 'checkView'">checkView</div>
+        
+        
+        <!---- Statistics View ---->
+        <div class="viewClass" id="statisticsView" ng-show="_screen == 'statisticsView'">statisticsView</div>
+        
+        
+        <!---- Manager View ---->
+        <div class="viewClass" id="managerView" ng-show="_screen == 'managerView'">managerView</div>
+        
+        
+        <!---- Footer ---->
+        <div class="footer">
+            <ul>
+                <li ng-click="showScreen('loadView')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><div class="naviText">가져오기</div></li>
+                <li ng-click="showScreen('checkView')"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><div class="naviText">출석</div></li>
+                <li ng-click="showScreen('mainView')"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><div class="naviText">홈</div></li>
+                <li ng-click="showScreen('statisticsView')"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">통계</div></li>
+                <li ng-click="showScreen('managerView')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">관리</div></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Plugin -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- SCRIPT -->
+    <script src="js/indexController.js"></script>
+</body>
+
+</html>

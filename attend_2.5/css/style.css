@@ -1,0 +1,76 @@
+/********** common CSS **********/
+ul, ol, li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+    text-shadow: 0.2px 0.1px gray;
+    font-family: "Helvetica Nene", Helvetica, Arial, 맑은 고딕;,"malgun gothic", sans-serif;
+}
+
+.outer {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.centered {
+  position: relative;
+  display: inline-block;
+/*  width: 50%;*/
+  padding: 1em;
+/*  background: orange;*/
+/*  color: white;*/
+}
+
+.viewClass{
+    position: absolute;
+}
+
+/********** coldStartView **********/
+#coldStart{
+    width: 100%;
+    height: 100%;
+    background-color: azure;
+}
+
+#coldStartImg{
+    width: 240px;
+    height: 240px;
+    background-image: url(../image/bono.png);
+}
+
+/********** footer **********/
+.footer{
+    width: 100%;
+    z-index: 9999;
+    top: auto;
+    bottom: 0;
+    position: fixed;
+    opacity: 1;
+    background-color: #fff;
+    box-shadow: 0px -1px 4px 0px rgba(0,0,0,0.1);
+}
+
+.footer li{
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 10px 0px;
+    
+    background-color: dodgerblue;
+    color: white;
+    text-shadow: 0.5px 0.5px black;
+}
+
+.naviText{
+    font-size: 12px;
+}
