@@ -53,11 +53,11 @@
         <!---- Footer ---->
         <div class="footer">
             <ul>
-                <li ng-click="showScreen('loadView')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><div class="naviText">가져오기</div></li>
-                <li ng-click="showScreen('checkView')"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><div class="naviText">출석</div></li>
-                <li ng-click="showScreen('mainView')"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><div class="naviText">홈</div></li>
-                <li ng-click="showScreen('statisticsView')"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">통계</div></li>
-                <li ng-click="showScreen('managerView')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">관리</div></li>
+                <li ng-click="showScreen('loadView')" ng-class="{'footerSelected' : _screen == 'loadView'}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><div class="naviText">가져오기</div></li>
+                <li ng-click="showScreen('checkView')" ng-class="{'footerSelected' : _screen == 'checkView'}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><div class="naviText">출석</div></li>
+                <li ng-click="showScreen('mainView')" ng-class="{'footerSelected' : _screen == 'mainView'}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><div class="naviText">홈</div></li>
+                <li ng-click="showScreen('statisticsView')" ng-class="{'footerSelected' : _screen == 'statisticsView'}"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">통계</div></li>
+                <li ng-click="showScreen('managerView')" ng-class="{'footerSelected' : _screen == 'managerView'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">관리</div></li>
             </ul>
         </div>
     </div>

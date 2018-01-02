@@ -2,7 +2,8 @@ var ampApp = angular.module('ampApp', []);
 
 ampApp.controller('ampCtrl', function ($scope, $timeout) {
 
-    //defined
+    //******************** common Function ********************//
+    
     $scope.text = 'Hello, Angular fanatic.';
     $scope._screen = "coldStart";
 
@@ -20,6 +21,33 @@ ampApp.controller('ampCtrl', function ($scope, $timeout) {
         console.log("showScreen : " + screen);
         $scope._screen = screen;
         $scope.$evalAsync(); //timeout 시에는 강제로 갱신필요
+    }
+    
+    
+    //******************** ajax Function ********************//
+    
+    $scope.getAttendDateList = function() { //1.날짜목록을 가져온다. Group By
+        
+    }
+    
+    $scope.getAttendByDate = function() { //2.날짜에 해당하는 출석을 가져온다. 
+        
+    }
+    
+    $scope.setAttend = function() { //3.출석을 저장한다. create/update
+        
+    }
+    
+    $scope.getPeople = function() { //모든 인원정보를 가져온다.
+        
+    }
+    
+    $scope.getPerson = function() { //인원 한명에 정보를 가져온다.
+        
+    }
+    
+    $scope.setPerson = function() { //인원 한명의 정보를 추가/변경한다.
+        
     }
 });
 
