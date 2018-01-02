@@ -30,16 +30,16 @@
         </div>
         
         
-        <!---- Main View ---->
-        <div class="viewClass" id="mainView" ng-show="_screen == 'mainView'">mainView</div>
-        
-        
         <!---- Load View ---->
-        <div class="viewClass" id="loadView" ng-show="_screen == 'loadView'">loadView</div>
+        <div class="viewClass" id="loadView" ng-show="_screen == 'loadView'">{{_dateList}}</div>
         
         
         <!---- Check View ---->
-        <div class="viewClass" id="checkView" ng-show="_screen == 'checkView'">checkView</div>
+        <div class="viewClass" id="checkView" ng-show="_screen == 'checkView'">{{_peopleList}}</div>
+        
+        
+        <!---- Main View ---->
+        <div class="viewClass" id="mainView" ng-show="_screen == 'mainView'">mainView{{text}}</div>
         
         
         <!---- Statistics View ---->
@@ -47,7 +47,7 @@
         
         
         <!---- Manager View ---->
-        <div class="viewClass" id="managerView" ng-show="_screen == 'managerView'">managerView</div>
+        <div class="viewClass" id="managerView" ng-show="_screen == 'managerView'">managerView{{_setAttend}}</div>
         
         
         <!---- Footer ---->
@@ -63,7 +63,8 @@
     </div>
 
     <!-- Plugin -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script data-require="angular.js@1.5.8" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- SCRIPT -->
