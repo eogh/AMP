@@ -5,9 +5,13 @@
         echo "Failed to connect to MySQL : " . mysqli_connect_error();
     }
     
-//    $postdata = file_get_contents("php://input");
+    $postdata = file_get_contents("php://input");
+    $postObj = json_decode($postdata);
 
-    $result = mysqli_query($con, "select date FROM attend_2018 GROUP BY date");
+    $day = $postObj->day;
+    $part = $postObj->part;
+    
+    $result = mysqli_query($con, "select * FROM peopleM AS p LEFT JOIN attend_2018 AS a ON p.id = a.id WHERE a.date = '".$day."' and a.part= '".$part."' ORDER BY p.group");
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){

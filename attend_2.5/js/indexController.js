@@ -9,7 +9,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
-    $scope._setAttend; //임시로 만듬
+    $scope._UPDATE_Attend; //임시로 만듬
     
     
     $scope.onload = function () {
@@ -28,19 +28,19 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         
         switch(screen) {
             case 'loadView' :
-                $scope.getAttendDateList();
+                $scope.SELECT_DateList();
                 break;
             case 'checkView' :
-                $scope.getPeople();
+                $scope.CREATE_Attend();
                 break;
             case 'mainView' :
                 
                 break;
             case 'statisticsView' :
-                
+                $scope.SELECT_Attend();
                 break;
             case 'managerView' :
-                $scope.setAttend();
+                $scope.UPDATE_Attend();
                 break;
             default : 
                 break;
@@ -51,57 +51,69 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     //******************** AJAX Function ********************//
     
-    $scope.getAttendDateList = function() { //1.날짜목록을 가져온다. Group By
+    $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
         $http({
             method: 'POST',
-            url: 'ajax/GET_attendDateList.php',
-            data: 3,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).success(function(res){
-            $scope._dateList = res;
-            console.log("getAttendDateList :: _dateList = "+JSON.stringify($scope._dateList));
-        }).error(function(e){
-            
-        });
-    }
-    
-    $scope.getAttendByDate = function() { //2.날짜에 해당하는 출석을 가져온다. 
-        
-    }
-    
-    $scope.setAttend = function() { //3.출석을 저장한다. create/update
-        $http({
-            method: 'POST',
-            url: 'ajax/SET_attend.php',
-            data: $scope._peopleList,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).success(function(res){
-            console.log("setAttend :: "+JSON.stringify(res));
-            console.log("setAttend :: "+res);
-            console.log("저장되었습니다.");
-            $scope._setAttend = res;
-        }).error(function(e){
-            console.log("실패하였습니다.");
-        });
-    }
-    
-    $scope.getPeople = function() { //모든 인원정보를 가져온다.
-        $http({
-            method: 'POST',
-            url: 'ajax/GET_peopleData.php',
+            url: 'ajax/DateList_SELECT.php',
             data: '모두공동체',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
-            $scope._peopleList = res;
-            console.log("getPeople :: _peopleList = "+JSON.stringify($scope._peopleList));
+            $scope._dateList = res;
         }).error(function(e){
             
+        });
+    }
+    
+    $scope.CREATE_Attend = function() { //2. 오늘날짜에 출석을 만든다.
+        $http({
+            method: 'POST',
+            url: 'ajax/Attend_CREATE.php',
+            data: {
+                day : '2018-01-01', 
+                part : '모두공동체'
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+            
+        }).error(function(e){
+            
+        });
+    }
+    
+    $scope.SELECT_Attend = function() { //3.날짜에 해당하는 출석을 가져온다. 
+        $http({
+            method: 'POST',
+            url: 'ajax/Attend_SELECT.php',
+            data: {
+                day : '2018-01-01', 
+                part : '모두공동체'
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+            $scope._peopleList = res;
+        }).error(function(e){
+            
+        });
+    }
+    
+    $scope.UPDATE_Attend = function() { //4.출석을 저장한다. create/update
+        $http({
+            method: 'POST',
+            url: 'ajax/Attend_UPDATE.php',
+            data: $scope._peopleList,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+            console.log("저장되었습니다.");
+        }).error(function(e){
+            console.log("실패하였습니다.");
         });
     }
     
