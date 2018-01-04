@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 /********** common CSS **********/
 ul, ol, li{
     list-style: none;
@@ -8,8 +10,8 @@ ul, ol, li{
 .container-fluid{
     padding-left: 0px;
     padding-right: 0px;
-    text-shadow: 0.2px 0.1px gray;
-    font-family: "Helvetica Nene", Helvetica, Arial, 맑은 고딕;,"malgun gothic", sans-serif;
+/*    text-shadow: 0.2px 0.1px gray;*/
+    font-family: 'Nanum Gothic', serif;
 }
 
 .outer {
@@ -34,12 +36,98 @@ ul, ol, li{
 .viewClass{
     position: absolute;
 }
+/********** common header **********/
+.header{
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 10;
+}
+
+.mainTitle{
+    color:#000;
+    font-size: 18px;
+    text-shadow: 0.5px 0.5px lightgray;
+}
+
+.subTitle{
+    color: darkgray;
+    font-size: 8px;
+}
+
+.lBtn{
+    position: fixed;
+    left: 0px;
+    margin-top: 5px;
+    margin-left: 12px;
+    z-index: 20;
+}
+
+.rBtn{
+    position: fixed;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 12px;
+    z-index: 20;
+}
+
+/********** common body **********/
+.viewBody{
+    margin-top: 40px;
+}
+
+.listTitle{
+    float: left;
+    width:100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 2px 0px 2px 10px;
+    color: white;
+    text-shadow: 0.5px 0.5px black;
+    background-color:dodgerblue;
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.listBox{
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.listItem{
+    height: 27px;
+    line-height: 27px;
+    background-color: rgba(200,200,200,0.1);
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 1px 1px #aaa;
+}
+
+.listIcon{
+    float: left;
+    margin-left: 12px;
+    margin-top: 5px;
+    text-align: left;
+    color: dodgerblue;
+    text-shadow: 0.5px 0.5px gray;
+}
+
+.listName{
+    position: absolute;
+    text-align: right;
+    right: 0;
+    font-size: 15px;
+    padding-right: 20px;
+}
 
 /********** coldStartView **********/
 #coldStart{
     width: 100%;
     height: 100%;
-    background-color: azure;
+    background-color: dodgerblue;
 }
 
 #coldStartImg{
@@ -47,6 +135,34 @@ ul, ol, li{
     height: 240px;
     background-image: url(../image/bono.png);
 }
+
+/********** loadView **********/
+#loadView{
+    width: 100%;
+    height: 100%;
+}
+
+#createItem{
+    height: 27px;
+    line-height: 27px;
+    background-color: rgba(200,200,200,0.1);
+    border: 1px dashed gray;
+    border-radius: 5px;
+    box-shadow: 1px 1px #aaa;
+}
+
+#createList{
+    text-align: center;
+    font-size: 15px;
+}
+/********** checkView **********/
+#checkView{
+    width: 100%;
+    height: 100%;
+}
+/********** mainView **********/
+/********** statisticsView **********/
+/********** managerView **********/
 
 /********** footer **********/
 .footer{
@@ -64,7 +180,7 @@ ul, ol, li{
     float: left;
     width: 20%;
     text-align: center;
-    padding: 10px 0px;
+    padding: 3px 0px;
 }
 
 .footerSelected{
@@ -74,5 +190,5 @@ ul, ol, li{
 }
 
 .naviText{
-    font-size: 12px;
+    font-size: 11px;
 }

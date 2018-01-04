@@ -1,4 +1,8 @@
-var ampApp = angular.module('ampApp', []);
+/*
+*'angular.filter' -> ng-repeat key/value 를 하기 위해 필요한 값
+*
+*/
+var ampApp = angular.module('ampApp', ['angular.filter']);
 
 ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 
@@ -6,7 +10,8 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.text = 'Hello, Angular fanatic.';
     $scope._screen = "coldStart"; //default :: coldStart
-
+    $scope.isCheckFlag = false; //false:예배, true:모임
+    
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     $scope._UPDATE_Attend; //임시로 만듬
@@ -31,13 +36,14 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 $scope.SELECT_DateList();
                 break;
             case 'checkView' :
-                $scope.CREATE_Attend();
+                
+                $scope.SELECT_Attend();
                 break;
             case 'mainView' :
                 
                 break;
             case 'statisticsView' :
-                $scope.SELECT_Attend();
+                $scope.isCheckFlag = true;
                 break;
             case 'managerView' :
                 $scope.UPDATE_Attend();
@@ -48,7 +54,36 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope.$evalAsync(); //timeout 시에는 강제로 갱신필요
     }
     
-    
+    $scope.checkAttend = function(state, id) {
+        console.log("state : " + state);
+        console.log("id : " + id);
+        
+        var index;
+        
+        for(var i=0; i < $scope._peopleList.length; i++){
+            console.log("$scope._peopleList[i].id = "+$scope._peopleList[i].id);
+            console.log("id = "+id);
+            if($scope._peopleList[i].id == id) {
+                index = i;
+                break;
+            }
+        }
+        
+        console.log("index : " + index);
+        if(state == "check1") {
+            if($scope._peopleList[index].check1 == '1') {
+                $scope._peopleList[index].check1 = '0';
+            } else {
+                $scope._peopleList[index].check1 = '1';
+            }
+        } else if(state == "check2") {
+            if($scope._peopleList[index].check2 == '1') {
+                $scope._peopleList[index].check2 = '0';
+            } else {
+                $scope._peopleList[index].check2 = '1';
+            }
+        }
+    }
     //******************** AJAX Function ********************//
     
     $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
@@ -100,6 +135,11 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }).error(function(e){
             
         });
+//        $scope._peopleList = [{id:"180102_조대용",name:"조대용",gender:"1",age:"91",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+//                              {id:"180102_조대호",name:"조대호",gender:"1",age:"90",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+//                              {id:"180101_최지애",name:"최지애",gender:"2",age:"88",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+//                              {id:"180101_차재능",name:"차재능",gender:"1",age:"91",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"}
+//                             ];
     }
     
     $scope.UPDATE_Attend = function() { //4.출석을 저장한다. create/update
