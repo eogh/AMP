@@ -29,7 +29,20 @@
             </div>
         </div>
         
-        
+        <!---- Login View ---->
+        <div class="viewClass" id="loginView" ng-show="_screen == 'loginView'">
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+						<h1 style="color:white">로그인</h1>
+                        <button type="button" class="btn btn-default btn-sm" ng-click="clicklogin('우리공동체')">우리공동체</button>
+            			<button type="button" class="btn btn-default btn-sm" ng-click="clicklogin('모두공동체')">모두공동체</button>
+            			<button type="button" class="btn btn-default btn-sm" ng-click="clicklogin('함께공동체')">함께공동체</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
         <!---- Load View ---->
         <!---- Load View ---->
         <!---- Load View ---->
@@ -38,7 +51,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">가져오기</div>
-                <div class="subTitle">우리 공동체</div>
+                <div class="subTitle">{{_loginInfo}}</div>
             </div>
 
             <!-- Body Area -->
@@ -68,7 +81,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">{{_checkViewTitle | getDay}}</div>
-                <div class="subTitle">우리 공동체</div>
+                <div class="subTitle">{{_loginInfo}}</div>
             </div>
             <button type="button" class="btn btn-default btn-sm lBtn" ng-click="clickToggleCheck()">{{_checkText}}</button>
             <button type="button" class="btn btn-default btn-sm rBtn" ng-click="clickUpdateAttend()">저장하기</button>
@@ -108,12 +121,18 @@
             
             <!-- Header Area -->
             <div class="header">
-                <div class="mainTitle">Main Page</div>
-                <div class="subTitle">우리 공동체</div>
+                <div class="mainTitle">홈</div>
+                <div class="subTitle">{{_loginInfo}}</div>
             </div>
 
             <!-- Body Area -->
-            
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <p>페이지 공사중</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         
@@ -125,12 +144,37 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">통계</div>
-                <div class="subTitle">우리 공동체</div>
+                <div class="subTitle">{{_loginInfo}}</div>
             </div>
-            <button type="button" class="btn btn-default btn-sm rBtn">Copy to clipboard</button>
+            <button type="button" id="copyToClipboard" class="btn btn-default btn-sm rBtn">클립보드저장</button>
             
             <!-- Body Area -->
-            
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>남자</th>
+                                <th>여자</th>
+                                <th>합계</th>
+                            </tr>
+                            <tr>
+                                <th>예배</th>
+                                <th>{{count11}}</th>
+                                <th>{{count21}}</th>
+                                <th>{{count11+count21}}</th>
+                            </tr>
+                            <tr>
+                                <th>모임</th>
+                                <th>{{count12}}</th>
+                                <th>{{count22}}</th>
+                                <th>{{count12+count22}}</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
         
         
@@ -142,10 +186,17 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">관리</div>
-                <div class="subTitle">우리 공동체</div>
+                <div class="subTitle">{{_loginInfo}}</div>
             </div>
 
             <!-- Body Area -->
+			<div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <p>페이지 공사중</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         
@@ -154,9 +205,9 @@
             <ul>
                 <li ng-click="showScreen('loadView')" ng-class="{'footerSelected' : _screen == 'loadView'}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><div class="naviText">가져오기</div></li>
                 <li ng-click="showScreen('checkView')" ng-class="{'footerSelected' : _screen == 'checkView'}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><div class="naviText">출석</div></li>
-                <li ng-click="showScreen('mainView')" ng-class="{'footerSelected' : _screen == 'mainView'}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><div class="naviText">(준비중)</div></li>
-                <li ng-click="showScreen('statisticsView')" ng-class="{'footerSelected' : _screen == 'statisticsView'}"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">(준비중)</div></li>
-                <li ng-click="showScreen('managerView')" ng-class="{'footerSelected' : _screen == 'managerView'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">(준비중)</div></li>
+                <li ng-click="showScreen('mainView')" ng-class="{'footerSelected' : _screen == 'mainView'}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><div class="naviText">홈</div></li>
+                <li ng-click="showScreen('statisticsView')" ng-class="{'footerSelected' : _screen == 'statisticsView'}"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">통계</div></li>
+                <li ng-click="showScreen('managerView')" ng-class="{'footerSelected' : _screen == 'managerView'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">관리</div></li>
             </ul>
         </div>
     </div>
@@ -167,6 +218,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="plugin/clipboard.min.js"></script>
     <!-- SCRIPT -->
     <script src="js/indexController.js"></script>
 </body>

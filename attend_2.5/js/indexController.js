@@ -8,24 +8,28 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 
     //******************** common Function ********************//
     
-    $scope.text = 'Hello, Angular fanatic.';
     $scope.nowDate = Date.now();
-    
     $scope._screen = "coldStart"; //default :: coldStart
+	
+	$scope._loginInfo = "";
     $scope._checkFlag = false; //false:예배, true:모임
     $scope._checkText = "예배";
     $scope._checkViewTitle = "";
+	
+	$scope.count11 = 0;
+	$scope.count12 = 0;
+	$scope.count21 = 0;
+	$scope.count22 = 0;
+	
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
-        $scope.text = 'Hello, Angular fanatic111.';
-
         $scope.showScreen("coldStart");
         $timeout(function () {
-            $scope.showScreen("mainView");
+            $scope.showScreen("loginView");
         }, 1000);
     }
 
@@ -34,6 +38,12 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope._screen = screen;
         
         switch(screen) {
+			case 'coldStart' :
+				
+                break;
+			case 'loginView' :
+				
+                break;
             case 'loadView' :
                 $scope.SELECT_DateList();
                 break;
@@ -44,7 +54,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 
                 break;
             case 'statisticsView' :
-                $scope._checkFlag = true;
+				$scope.initStatisticsView();
                 break;
             case 'managerView' :
                 
@@ -55,6 +65,15 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope.$evalAsync(); //timeout 시에는 강제로 갱신필요
     }
     
+    //******************** loginView Function ********************//
+	
+	$scope.clicklogin = function(info) {
+		console.log("clicklogin");
+		
+		$scope._loginInfo = info;
+		$scope.showScreen("loadView");
+	}
+	
     //******************** loadView Function ********************//
     
     $scope.clickCreateAttend = function(day) {
@@ -129,6 +148,41 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     //******************** mainView Function ********************//
     //******************** statisticsView Function ********************//
+	
+	$scope.initStatisticsView = function() {
+		console.log("initStatisticsView");
+		
+		for(var i=0; i<$scope._peopleList.length; i++){
+            if($scope._peopleList[i].gender == "1" && $scope._peopleList[i].check1 == "1"){//남자and예배
+                $scope.count11 ++;
+            }else if($scope._peopleList[i].gender == "2" && $scope._peopleList[i].check1 == "1"){//여자and예배
+                $scope.count21 ++;
+            } else if($scope._peopleList[i].gender == "1" && $scope._peopleList[i].check2 == "1"){//남자and모임
+                $scope.count12 ++;
+            }else if($scope._peopleList[i].gender == "2" && $scope._peopleList[i].check2 == "1"){//여자and모임
+                $scope.count22 ++;
+            }
+        }
+	};
+	
+	var clipboard = new Clipboard('#copyToClipboard', {
+        text: function(){
+
+            return $scope._loginInfo+'\n'
+                +'예배: 남-'+$scope.count11+'명/여-'+$scope.count21+'명 = '+($scope.count11+$scope.count21)+'명\n'
+                +'모임: 남-'+$scope.count12+'명/여-'+$scope.count22+'명 = '+($scope.count12+$scope.count22)+'명\n'
+                +'새로 온 지체: 0명\n'
+                +'오랜만에 온 지체: 0명\n';
+        }
+    });
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+	
     //******************** managerView Function ********************//
     
     
@@ -138,7 +192,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $http({
             method: 'POST',
             url: 'ajax/DateList_SELECT.php',
-            data: '우리공동체',
+            data: $scope._loginInfo,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -158,7 +212,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             url: 'ajax/Attend_CREATE.php',
             data: {
                 day : day, 
-                part : '우리공동체'
+                part : $scope._loginInfo
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -178,7 +232,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             url: 'ajax/Attend_SELECT.php',
             data: {
                 day : day, 
-                part : '우리공동체'
+                part : $scope._loginInfo
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -186,6 +240,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }).success(function(res){
             $scope._peopleList = res;
             $scope._checkViewTitle = day;
+			$scope.showScreen("checkView");
         }).error(function(e){
             
         });
