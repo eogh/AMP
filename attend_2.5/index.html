@@ -93,6 +93,7 @@
                     <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check1', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check1 == '1'"></span>
+                            <div class="listDivider"></div>
                             <div class="listName">{{_peopleList.name}}</div>
                         </div>
                     </div>
@@ -105,6 +106,7 @@
                     <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check2', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check2 == '1'"></span>
+                            <div class="listDivider"></div>
                             <div class="listName">{{_peopleList.name}}</div>
                         </div>
                     </div>
@@ -209,6 +211,17 @@
                 <li ng-click="showScreen('statisticsView')" ng-class="{'footerSelected' : _screen == 'statisticsView'}"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><div class="naviText">통계</div></li>
                 <li ng-click="showScreen('managerView')" ng-class="{'footerSelected' : _screen == 'managerView'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><div class="naviText">관리</div></li>
             </ul>
+        </div>
+        
+        <!---- toast ---->
+        <div class="toast" ng-show="_showToast">
+            <div class="outer">
+                <div class="inner">
+                    <div class="centered">
+                        <div id="toastArea">{{_toastText}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

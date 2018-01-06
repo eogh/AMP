@@ -10,15 +10,16 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.nowDate = Date.now();
     $scope._screen = "coldStart"; //default :: coldStart
-	
+	$scope._dummyData = false; //크롬 테스트용
+    
 	$scope._loginInfo = "";
     $scope._checkFlag = false; //false:예배, true:모임
     $scope._checkText = "예배";
     $scope._checkViewTitle = "";
-	
+	$scope._toastText = "";
+	$scope._showToast = false;
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
-    
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
@@ -26,6 +27,8 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $timeout(function () {
             $scope.showScreen("loginView");
         }, 1000);
+        
+        $scope.showDummyData($scope._dummyData);
     }
 
     $scope.showScreen = function (screen) {
@@ -60,6 +63,16 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope.$evalAsync(); //timeout 시에는 강제로 갱신필요
     }
     
+    $scope.toastMessage = function(message) {
+        console.log("toastMessage : " + message);
+        
+        $scope._toastText = message;
+        
+        $scope._showToast = true;
+        $timeout(function() {
+            $scope._showToast = false;
+        }, 1000);
+    }
     //******************** loginView Function ********************//
 	
 	$scope.clicklogin = function(info) {
@@ -82,7 +95,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             }
             $scope.CREATE_Attend(day, sCallback);
         } else {
-            console.log("이미 생성되어 있습니다.");
+            $scope.toastMessage("이미 생성되어 있습니다.");
         }
     }
     
@@ -176,7 +189,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }
     });
     clipboard.on('success', function(e) {
-        console.log(e);
+        $scope.toastMessage("클립보드에 저장되었습니다.");
     });
 
     clipboard.on('error', function(e) {
@@ -198,10 +211,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             }
         }).success(function(res){
             $scope._dateList = res;
+            $scope.toastMessage("날짜 목록을 불러옵니다.");
         }).error(function(e){
-            
+            $scope.toastMessage("날짜 목록을 불러오지 못했습니다.");
         });
-//        $scope._dateList = [{date:"2018-01-01"}, {date:"2018-01-03"}, {date:"2018-01-08"}];
     }
     
     $scope.CREATE_Attend = function(day, sCallback) { //2. 오늘날짜에 출석을 만든다.
@@ -220,13 +233,13 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }).success(function(res){
             sCallback();
         }).error(function(e){
-
+            $scope.toastMessage("새로만들기가 실패하였습니다.");
         });
     }
     
     $scope.SELECT_Attend = function(day) { //3.날짜에 해당하는 출석을 가져온다. 
         console.log("SELECT_Attend day : " + day);
-        
+
         $http({
             method: 'POST',
             url: 'ajax/Attend_SELECT.php',
@@ -242,13 +255,8 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             $scope._checkViewTitle = day;
 			$scope.showScreen("checkView");
         }).error(function(e){
-            
+            $scope.toastMessage("출석정보를 가져오지 못했습니다.");
         });
-//        $scope._peopleList = [{id:"180102_조대용",name:"조대용",gender:"1",age:"91",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
-//                              {id:"180102_조대호",name:"조대호",gender:"1",age:"90",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
-//                              {id:"180101_최지애",name:"최지애",gender:"2",age:"88",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
-//                              {id:"180101_차재능",name:"차재능",gender:"1",age:"91",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"}
-//                             ];
     }
     
     $scope.UPDATE_Attend = function() { //4.출석을 저장한다. create/update
@@ -260,9 +268,9 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
-            console.log("저장되었습니다.");
+            $scope.toastMessage("저장되었습니다.");
         }).error(function(e){
-            console.log("실패하였습니다.");
+            $scope.toastMessage("저장에 실패하였습니다.");
         });
     }
     
@@ -272,6 +280,22 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.setPerson = function() { //인원 한명의 정보를 추가/변경한다.
         //추후작업
+    }
+    
+    //******************** Another Function ********************//
+    
+    $scope.showDummyData = function(flag) {
+        
+        if(flag) {
+            
+            //DUMMY DATA
+            $scope._peopleList = [{id:"180102_조대용",name:"조대용",gender:"1",age:"91",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+                                      {id:"180102_조대호",name:"조대호",gender:"1",age:"90",part:"모두공동체",group:"대호마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+                                      {id:"180101_최지애",name:"최지애",gender:"2",age:"88",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"},
+                                      {id:"180101_차재능",name:"차재능",gender:"1",age:"91",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"}
+                                     ];
+            $scope._dateList = [{date:"2018-01-01"}, {date:"2018-01-03"}, {date:"2018-01-08"}];
+        }
     }
 });
 
