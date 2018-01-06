@@ -16,11 +16,6 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     $scope._checkText = "예배";
     $scope._checkViewTitle = "";
 	
-	$scope.count11 = 0;
-	$scope.count12 = 0;
-	$scope.count21 = 0;
-	$scope.count22 = 0;
-	
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     
@@ -152,6 +147,11 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	$scope.initStatisticsView = function() {
 		console.log("initStatisticsView");
 		
+        $scope.count11 = 0;
+        $scope.count12 = 0;
+        $scope.count21 = 0;
+        $scope.count22 = 0;
+        
 		for(var i=0; i<$scope._peopleList.length; i++){
             if($scope._peopleList[i].gender == "1" && $scope._peopleList[i].check1 == "1"){//남자and예배
                 $scope.count11 ++;
