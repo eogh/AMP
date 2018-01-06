@@ -9,12 +9,14 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     //******************** common Function ********************//
     
     $scope.text = 'Hello, Angular fanatic.';
-    $scope._screen = "coldStart"; //default :: coldStart
-    $scope.isCheckFlag = false; //false:예배, true:모임
+    $scope.nowDate = Date.now();
     
+    $scope._screen = "coldStart"; //default :: coldStart
+    $scope._checkFlag = false; //false:예배, true:모임
+    $scope._checkText = "예배";
+    $scope._checkViewTitle = "";
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
-    $scope._UPDATE_Attend; //임시로 만듬
     
     
     $scope.onload = function () {
@@ -37,16 +39,15 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 break;
             case 'checkView' :
                 
-                $scope.SELECT_Attend();
                 break;
             case 'mainView' :
                 
                 break;
             case 'statisticsView' :
-                $scope.isCheckFlag = true;
+                $scope._checkFlag = true;
                 break;
             case 'managerView' :
-                $scope.UPDATE_Attend();
+                
                 break;
             default : 
                 break;
@@ -54,7 +55,48 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope.$evalAsync(); //timeout 시에는 강제로 갱신필요
     }
     
-    $scope.checkAttend = function(state, id) {
+    //******************** loadView Function ********************//
+    
+    $scope.clickCreateAttend = function(day) {
+        
+        var dateString = JSON.stringify($scope._dateList);
+        var dateIdx = dateString.indexOf(day);
+        
+        if(dateIdx === -1) {
+            var sCallback = function() {
+                $scope.SELECT_Attend(day);
+            }
+            $scope.CREATE_Attend(day, sCallback);
+        } else {
+            console.log("이미 생성되어 있습니다.");
+        }
+    }
+    
+    $scope.clickSelectAttend = function(day) {
+        
+        $scope.SELECT_Attend(day);
+    }
+    
+    //******************** checkView Function ********************//
+    
+    $scope.clickUpdateAttend = function() {
+        
+        $scope.UPDATE_Attend();
+    }
+    
+    $scope.clickToggleCheck = function() {
+        console.log("clickToggleCheck flag : "+$scope._checkFlag);
+        
+        if($scope._checkFlag == true) {
+            $scope._checkFlag = false;
+            $scope._checkText = "예배";
+        } else {
+            $scope._checkFlag = true;
+            $scope._checkText = "모임";
+        }
+    }
+    
+    $scope.clickCheckAttend = function(state, id) {
         console.log("state : " + state);
         console.log("id : " + id);
         
@@ -84,13 +126,19 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             }
         }
     }
+    
+    //******************** mainView Function ********************//
+    //******************** statisticsView Function ********************//
+    //******************** managerView Function ********************//
+    
+    
     //******************** AJAX Function ********************//
     
     $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
         $http({
             method: 'POST',
             url: 'ajax/DateList_SELECT.php',
-            data: '모두공동체',
+            data: '우리공동체',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -99,39 +147,45 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }).error(function(e){
             
         });
+//        $scope._dateList = [{date:"2018-01-01"}, {date:"2018-01-03"}, {date:"2018-01-08"}];
     }
     
-    $scope.CREATE_Attend = function() { //2. 오늘날짜에 출석을 만든다.
+    $scope.CREATE_Attend = function(day, sCallback) { //2. 오늘날짜에 출석을 만든다.
+        console.log("CREATE_Attend day : " + day);
+        
         $http({
             method: 'POST',
             url: 'ajax/Attend_CREATE.php',
             data: {
-                day : '2018-01-01', 
-                part : '모두공동체'
+                day : day, 
+                part : '우리공동체'
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
-            
+            sCallback();
         }).error(function(e){
-            
+
         });
     }
     
-    $scope.SELECT_Attend = function() { //3.날짜에 해당하는 출석을 가져온다. 
+    $scope.SELECT_Attend = function(day) { //3.날짜에 해당하는 출석을 가져온다. 
+        console.log("SELECT_Attend day : " + day);
+        
         $http({
             method: 'POST',
             url: 'ajax/Attend_SELECT.php',
             data: {
-                day : '2018-01-01', 
-                part : '모두공동체'
+                day : day, 
+                part : '우리공동체'
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
             $scope._peopleList = res;
+            $scope._checkViewTitle = day;
         }).error(function(e){
             
         });
@@ -167,16 +221,31 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 });
 
 
+    //******************** filter Function ********************//
 
+ampApp.filter("getDay", function () {
+    return function (input) {
 
+        if(input == "") {
+            return "출석";
+        }
+        // Your logic
+        var dayNamesShort = ['일', '월', '화', '수', '목', '금', '토'];
 
+        var today = new Date(input).getDay();
+        var todayLabel = dayNamesShort[today];
 
+        return input + " (" + todayLabel + ")";
+    }
 
+});
 
 
 /***********************************************************************************/
 /******************************나중에 사용 할 것들*************************************/
 /***********************************************************************************/
+
+
 
 ampApp.directive('customButton', function () {
     return {

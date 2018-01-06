@@ -155,6 +155,11 @@ ul, ol, li{
     text-align: center;
     font-size: 15px;
 }
+.load_listName{
+    text-align: center;
+    font-size: 15px;
+}
+
 /********** checkView **********/
 #checkView{
     width: 100%;

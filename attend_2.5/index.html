@@ -38,7 +38,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">가져오기</div>
-                <div class="subTitle">모두 공동체</div>
+                <div class="subTitle">우리 공동체</div>
             </div>
 
             <!-- Body Area -->
@@ -46,14 +46,13 @@
                 <div class="listTitle">새로만들기</div>
                 <div class="col-xs-6 col-sm-2 col-md-2 listBox">
                     <div id="createItem">
-                        <div id="createList">새로만들기</div>
+                        <div id="createList" ng-click="clickCreateAttend(nowDate | date:'yyyy-MM-dd')">새로만들기</div>
                     </div>
                 </div>
                 <div class="listTitle">가져오기</div>
                 <div class="col-xs-6 col-sm-2 col-md-2 listBox" ng-repeat="list in _dateList | orderBy:'name'">
-                    <div class="listItem">
-                        <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="true"></span>
-                        <div class="listName">{{list.date}}</div>
+                    <div class="listItem" ng-click="clickSelectAttend(list.date)">
+                        <div class="load_listName">{{list.date | getDay}}</div>
                     </div>
                 </div>
             </div>
@@ -68,17 +67,17 @@
             
             <!-- Header Area -->
             <div class="header">
-                <div class="mainTitle">2018-01-01</div>
-                <div class="subTitle">모두 공동체</div>
+                <div class="mainTitle">{{_checkViewTitle | getDay}}</div>
+                <div class="subTitle">우리 공동체</div>
             </div>
-            <button type="button" class="btn btn-default btn-sm lBtn">예배</button>
-            <button type="button" class="btn btn-default btn-sm rBtn" ng-click="UPDATE_Attend()">저장하기</button>
+            <button type="button" class="btn btn-default btn-sm lBtn" ng-click="clickToggleCheck()">{{_checkText}}</button>
+            <button type="button" class="btn btn-default btn-sm rBtn" ng-click="clickUpdateAttend()">저장하기</button>
             
             <!-- Body Area -->
-            <div class="viewBody" ng-hide="isCheckFlag">
+            <div class="viewBody" ng-hide="_checkFlag">
                 <div ng-repeat="(key, value) in _peopleList | groupBy: 'group'">
-                    <div class="listTitle">{{ key }}_예배</div>
-                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="checkAttend('check1', _peopleList.id)">
+                    <div class="listTitle">{{ key }}</div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check1', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check1 == '1'"></span>
                             <div class="listName">{{_peopleList.name}}</div>
@@ -87,10 +86,10 @@
                 </div>
             </div>
             
-            <div class="viewBody" ng-show="isCheckFlag">
+            <div class="viewBody" ng-show="_checkFlag">
                 <div ng-repeat="(key, value) in _peopleList | groupBy: 'group'">
-                    <div class="listTitle">{{ key }}_모임</div>
-                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="checkAttend('check2', _peopleList.id)">
+                    <div class="listTitle">{{ key }}</div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check2', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check2 == '1'"></span>
                             <div class="listName">{{_peopleList.name}}</div>
@@ -110,7 +109,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">Main Page</div>
-                <div class="subTitle">모두 공동체</div>
+                <div class="subTitle">우리 공동체</div>
             </div>
 
             <!-- Body Area -->
@@ -126,7 +125,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">통계</div>
-                <div class="subTitle">모두 공동체</div>
+                <div class="subTitle">우리 공동체</div>
             </div>
             <button type="button" class="btn btn-default btn-sm rBtn">Copy to clipboard</button>
             
@@ -143,7 +142,7 @@
             <!-- Header Area -->
             <div class="header">
                 <div class="mainTitle">관리</div>
-                <div class="subTitle">모두 공동체</div>
+                <div class="subTitle">우리 공동체</div>
             </div>
 
             <!-- Body Area -->
