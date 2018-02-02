@@ -170,7 +170,11 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 $scope.count11 ++;
             }else if($scope._peopleList[i].gender == "2" && $scope._peopleList[i].check1 == "1"){//여자and예배
                 $scope.count21 ++;
-            } else if($scope._peopleList[i].gender == "1" && $scope._peopleList[i].check2 == "1"){//남자and모임
+            }
+        }
+        
+        for(var i=0; i<$scope._peopleList.length; i++) {
+            if($scope._peopleList[i].gender == "1" && $scope._peopleList[i].check2 == "1"){//남자and모임
                 $scope.count12 ++;
             }else if($scope._peopleList[i].gender == "2" && $scope._peopleList[i].check2 == "1"){//여자and모임
                 $scope.count22 ++;
