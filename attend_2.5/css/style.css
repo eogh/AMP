@@ -81,7 +81,7 @@ ul, ol, li{
 }
 .listTitle{
     float: left;
-    width: 95%;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 5px;
     padding: 2px 0px 2px 10px;
