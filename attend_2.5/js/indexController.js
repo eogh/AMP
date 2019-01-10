@@ -23,11 +23,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
-        $scope.showScreen("coldStart");
-        $timeout(function () {
-            $scope.showScreen("loginView");
-        }, 1000);
-        
+        $scope.showScreen("loginView");
         $scope.showDummyData($scope._dummyData);
     }
 
