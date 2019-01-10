@@ -10,7 +10,7 @@
 
     for($idx = 0; $idx < count($request); $idx++){
         
-        $query="UPDATE attend_2018 SET part='".$request[$idx]->part."', check1='".$request[$idx]->check1."', check2='".$request[$idx]->check2."' WHERE id='".$request[$idx]->id."' and date='".$request[$idx]->date."';";
+        $query="UPDATE attend_2019 SET part='".$request[$idx]->part."', check1='".$request[$idx]->check1."', check2='".$request[$idx]->check2."' WHERE id='".$request[$idx]->id."' and date='".$request[$idx]->date."';";
         
         mysqli_query($con, $query);
     }

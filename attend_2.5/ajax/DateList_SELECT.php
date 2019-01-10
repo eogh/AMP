@@ -7,7 +7,7 @@
     
     $postdata = file_get_contents("php://input");
 
-    $result = mysqli_query($con, "select date FROM attend_2018 WHERE part ='".$postdata."' GROUP BY date");
+    $result = mysqli_query($con, "select date FROM attend_2019 WHERE part ='".$postdata."' GROUP BY date");
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){

@@ -15,7 +15,7 @@
 
     $result = mysqli_query($con, "select id FROM peopleM WHERE part ='".$part."' ORDER BY id ASC");
 
-    $query.= "INSERT INTO attend_2018 (id, part, check1, check2, date) VALUES "; 
+    $query.= "INSERT INTO attend_2019 (id, part, check1, check2, date) VALUES "; 
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
