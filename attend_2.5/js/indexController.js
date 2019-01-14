@@ -18,6 +18,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     $scope._checkViewTitle = "";
 	$scope._toastText = "";
 	$scope._showToast = false;
+	$scope._showLoading = false;
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     
@@ -69,6 +70,15 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             $scope._showToast = false;
         }, 1000);
     }
+	
+	$scope.loading = {
+		start : function(){
+			$scope._showLoading = true;
+		},
+		stop : function(){
+			$scope._showLoading = false;
+		}
+	}
     //******************** loginView Function ********************//
 	
 	$scope.clicklogin = function(info) {
@@ -81,7 +91,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     //******************** loadView Function ********************//
     
     $scope.clickCreateAttend = function(day) {
-        
+		
         var dateString = JSON.stringify($scope._dateList);
         var dateIdx = dateString.indexOf(day);
         
@@ -202,6 +212,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     //******************** AJAX Function ********************//
     
     $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
+		$scope.loading.start();
         $http({
             method: 'POST',
             url: 'ajax/DateList_SELECT.php',
@@ -212,14 +223,17 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         }).success(function(res){
             $scope._dateList = res;
             $scope.toastMessage("날짜 목록을 불러옵니다.");
+			$scope.loading.stop();
         }).error(function(e){
             $scope.toastMessage("날짜 목록을 불러오지 못했습니다.");
+			$scope.loading.stop();
         });
     }
     
     $scope.CREATE_Attend = function(day, sCallback) { //2. 오늘날짜에 출석을 만든다.
         console.log("CREATE_Attend day : " + day);
-        
+        $scope.loading.start();
+		
         $http({
             method: 'POST',
             url: 'ajax/Attend_CREATE.php',
@@ -231,15 +245,18 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
+			$scope.loading.stop();
             sCallback();
         }).error(function(e){
+			$scope.loading.stop();
             $scope.toastMessage("새로만들기가 실패하였습니다.");
         });
     }
     
     $scope.SELECT_Attend = function(day) { //3.날짜에 해당하는 출석을 가져온다. 
         console.log("SELECT_Attend day : " + day);
-
+		$scope.loading.start();
+		
         $http({
             method: 'POST',
             url: 'ajax/Attend_SELECT.php',
@@ -251,15 +268,19 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
+			$scope.loading.stop();
             $scope._peopleList = res;
             $scope._checkViewTitle = day;
 			$scope.showScreen("checkView");
         }).error(function(e){
+			$scope.loading.stop();
             $scope.toastMessage("출석정보를 가져오지 못했습니다.");
         });
     }
     
     $scope.UPDATE_Attend = function() { //4.출석을 저장한다. create/update
+		$scope.loading.start();
+		
         $http({
             method: 'POST',
             url: 'ajax/Attend_UPDATE.php',
@@ -268,8 +289,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
+			$scope.loading.stop();
             $scope.toastMessage("저장되었습니다.");
         }).error(function(e){
+			$scope.loading.stop();
             $scope.toastMessage("저장에 실패하였습니다.");
         });
     }
