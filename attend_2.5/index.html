@@ -193,13 +193,36 @@
             </div>
 
             <!-- Body Area -->
-			<div class="outer">
-                <div class="inner">
-                    <div class="centered">
-                        <p>페이지 공사중</p>
+			<div class="viewBody">
+				
+				<div class="mana_inputBox">
+					<div class="form-inline">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="_managerViewInputText" placeholder="이름을 입력하세요.">
+								<div class="input-group-addon" ng-click="clickSearchPerson(_managerViewInputText)">검색</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox">
+                    <div id="mana_CreateItem">
+                        <div id="mana_CreateName" ng-click="">새로만들기</div>
                     </div>
                 </div>
-            </div>
+				
+				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox" ng-repeat="list in _manageList">
+                    <div class="mana_listItem" ng-click="">
+                        <div class="mana_listName">이름 : {{list.name}}</div>
+                        <div class="mana_listName">동기 : {{list.age}}</div>
+                        <div class="mana_listName">공동체 : {{list.part}}</div>
+                        <div class="mana_listName">마을 : {{list.group}}</div>
+                        <div class="mana_listName">생성일 : {{list.created}}</div>
+                    </div>
+                </div>
+				
+			</div>
         </div>
         
         

@@ -201,6 +201,41 @@ ul, ol, li{
 	width: 100%;
 	height: 100%;
 }
+.mana_inputBox{
+	padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.mana_listBox{
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+#mana_CreateItem{
+    height: 35px;
+    line-height: 35px;
+    background-color: rgba(200,200,200,0.1);
+    border: 1px dashed gray;
+    border-radius: 5px;
+    box-shadow: 1px 1px #aaa;
+}
+#mana_CreateName{
+    text-align: center;
+    font-size: 15px;
+}
+.mana_listItem{
+	height: 120px;
+/*    line-height: 70px;*/
+    background-color: rgba(200,200,200,0.1);
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 1px 1px #aaa;
+}
+.mana_listName{
+    text-align: left;
+    font-size: 15px;
+}
 /********** footer **********/
 .footer{
     width: 100%;

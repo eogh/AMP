@@ -19,8 +19,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	$scope._toastText = "";
 	$scope._showToast = false;
 	$scope._showLoading = false;
+	$scope._managerViewInputText = "";
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
+    $scope._manageList = []; //관리목록
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
@@ -207,8 +209,11 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     });
 	
     //******************** managerView Function ********************//
-    
-    
+	
+    $scope.clickSearchPerson = function(input) {
+		console.log("clickSearchPerson : "+input);
+		$scope.getPerson(input);
+	}
     //******************** AJAX Function ********************//
     
     $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
@@ -297,8 +302,26 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         });
     }
     
-    $scope.getPerson = function() { //인원 한명에 정보를 가져온다.
-        //추후작업
+    $scope.getPerson = function(input) { //인원 한명에 정보를 가져온다.
+		console.log("getPerson : "+input);
+        $scope.loading.start();
+		
+        $http({
+            method: 'POST',
+            url: 'ajax/Person_SELECT.php',
+            data: input,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+			console.log("res = "+JSON.stringify(res));
+			$scope._manageList = res;
+			$scope.loading.stop();
+            $scope.toastMessage("검색되었습니다.");
+        }).error(function(e){
+			$scope.loading.stop();
+            $scope.toastMessage("검색실패하였습니다.");
+        });
     }
     
     $scope.setPerson = function() { //인원 한명의 정보를 추가/변경한다.
