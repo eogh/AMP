@@ -12,7 +12,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     $scope._screen = "coldStart"; //default :: coldStart
 	$scope._dummyData = false; //크롬 테스트용
     
-	$scope._loginInfo = "";
+	$scope._loginInfo = ""; //우리공동체, 모두공동체, 함께공동체
     $scope._checkFlag = false; //false:예배, true:모임
     $scope._checkText = "예배";
     $scope._checkViewTitle = "";
@@ -365,6 +365,19 @@ ampApp.filter("getDay", function () {
 
 });
 
+ampApp.filter("getGender", function () {
+    return function (input) {
+
+		if(input == 1){
+			return "남자"
+		}else if(input == 2){
+			return "여자"
+		}else{
+			return "없음"
+		}
+    }
+
+});
 
 /***********************************************************************************/
 /******************************나중에 사용 할 것들*************************************/

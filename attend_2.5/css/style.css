@@ -213,8 +213,8 @@ ul, ol, li{
     padding-right: 6px;
 }
 #mana_CreateItem{
-    height: 35px;
-    line-height: 35px;
+    height: 132px;
+    line-height: 132px;
     background-color: rgba(200,200,200,0.1);
     border: 1px dashed gray;
     border-radius: 5px;
@@ -225,15 +225,22 @@ ul, ol, li{
     font-size: 15px;
 }
 .mana_listItem{
-	height: 120px;
-/*    line-height: 70px;*/
+	height: 132px;
     background-color: rgba(200,200,200,0.1);
     border: 1px solid white;
     border-radius: 5px;
     box-shadow: 1px 1px #aaa;
 }
-.mana_listName{
+.mana_listLine{
+	height: 32px;
+	line-height: 32px;
     text-align: left;
+    font-size: 15px;
+}
+.mana_listLineDel{
+	height: 96px;
+	line-height: 96px;
+    text-align: center;
     font-size: 15px;
 }
 /********** footer **********/

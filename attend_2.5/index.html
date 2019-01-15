@@ -196,14 +196,14 @@
 			<div class="viewBody">
 				
 				<div class="mana_inputBox">
-					<div class="form-inline">
+					<form class="form-inline">
 						<div class="form-group">
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="_managerViewInputText" placeholder="이름을 입력하세요.">
 								<div class="input-group-addon" ng-click="clickSearchPerson(_managerViewInputText)">검색</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox">
@@ -213,13 +213,37 @@
                 </div>
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox" ng-repeat="list in _manageList">
-                    <div class="mana_listItem" ng-click="">
-                        <div class="mana_listName">이름 : {{list.name}}</div>
-                        <div class="mana_listName">동기 : {{list.age}}</div>
-                        <div class="mana_listName">공동체 : {{list.part}}</div>
-                        <div class="mana_listName">마을 : {{list.group}}</div>
-                        <div class="mana_listName">생성일 : {{list.created}}</div>
-                    </div>
+                    <div class="mana_listItem" ng-click=""> <!-- 기본표시 화면-->
+						<form class="form-horizontal">
+							<div class="col-xs-12 mana_listLine">{{list.name}}</div>
+							<div class="col-xs-6 mana_listLine">{{list.gender | getGender}}</div>
+							<div class="col-xs-6 mana_listLine">{{list.age}}동기</div>
+							<div class="col-xs-6 mana_listLine">{{list.part}}</div>
+							<div class="col-xs-6 mana_listLine">{{list.group}}</div>
+							<button type="button" class="btn btn-default col-xs-6">삭제</button>
+							<button type="button" class="btn btn-default col-xs-6">수정</button>
+						</form>
+					</div>
+					
+					<div class="mana_listItem" ng-click="" ng-show="false"> <!-- 수정 화면-->
+						<form class="form-horizontal">
+							<div class="col-xs-12 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.name}}></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.gender}}></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.age}}></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.part}}></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.group}}></div>
+							<button type="button" class="btn btn-default col-xs-6">취소</button>
+							<button type="button" class="btn btn-default col-xs-6">수정</button>
+						</form>
+					</div>
+					
+					<div class="mana_listItem" ng-click="" ng-show="false"> <!-- 삭제 화면-->
+						<form class="form-horizontal">
+							<div class="col-xs-12 mana_listLineDel">'{{list.name}}' 삭제하시겠습니까?</div>
+							<button type="button" class="btn btn-default col-xs-6">취소</button>
+							<button type="button" class="btn btn-default col-xs-6">확인</button>
+						</form>
+					</div>
                 </div>
 				
 			</div>
