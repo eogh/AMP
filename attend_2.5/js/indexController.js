@@ -20,6 +20,9 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	$scope._showToast = false;
 	$scope._showLoading = false;
 	$scope._managerViewInputText = "";
+    $scope._managerCreateMode = "default"; //default, create
+    $scope._managerItemMode = "default"; //default, modify, delete
+    $scope._managerItemId = "";
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     $scope._manageList = []; //관리목록
@@ -54,7 +57,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 				$scope.initStatisticsView();
                 break;
             case 'managerView' :
-                
+                $scope._manageList = [];
+                $scope._managerViewInputText = "";
+                $scope._managerCreateMode = "default";
+                $scope._managerItemMode = "default";
                 break;
             default : 
                 break;
@@ -70,7 +76,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope._showToast = true;
         $timeout(function() {
             $scope._showToast = false;
-        }, 1000);
+        }, 2000);
     }
 	
 	$scope.loading = {
@@ -214,6 +220,16 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		console.log("clickSearchPerson : "+input);
 		$scope.getPerson(input);
 	}
+    
+    $scope.clickManagerCreate = function(mode) {
+        console.log("clickManagerCreate : "+mode);
+        $scope._managerCreateMode = mode;
+    }
+    
+    $scope.clickManagerItem = function(mode) {
+        console.log("clickManagerItem : "+mode);
+        $scope._managerItemMode = mode;
+    }
     //******************** AJAX Function ********************//
     
     $scope.SELECT_DateList = function() { //1.날짜목록을 가져온다. Group By
@@ -306,6 +322,8 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		console.log("getPerson : "+input);
         $scope.loading.start();
 		
+        $scope._manageList = [];
+        
         $http({
             method: 'POST',
             url: 'ajax/Person_SELECT.php',
@@ -314,10 +332,14 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(res){
-			console.log("res = "+JSON.stringify(res));
-			$scope._manageList = res;
+            console.log("res = "+JSON.stringify(res));
+            if(res != null && res != "null"){
+                $scope._manageList = res;
+                $scope.toastMessage("검색되었습니다.");
+            }else{
+                $scope.toastMessage("검색한 이름은 없습니다.");
+            }			
 			$scope.loading.stop();
-            $scope.toastMessage("검색되었습니다.");
         }).error(function(e){
 			$scope.loading.stop();
             $scope.toastMessage("검색실패하였습니다.");

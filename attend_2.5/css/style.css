@@ -225,11 +225,12 @@ ul, ol, li{
     font-size: 15px;
 }
 .mana_listItem{
-	height: 132px;
+	height: 137px;
     background-color: rgba(200,200,200,0.1);
     border: 1px solid white;
     border-radius: 5px;
     box-shadow: 1px 1px #aaa;
+    padding-top: 5px;
 }
 .mana_listLine{
 	height: 32px;

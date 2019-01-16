@@ -215,40 +215,52 @@
 				</div>
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox">
-                    <div id="mana_CreateItem">
-                        <div id="mana_CreateName" ng-click="">새로만들기</div>
+                    <div id="mana_CreateItem" ng-show="_managerCreateMode == 'default'">
+                        <div id="mana_CreateName" ng-click="clickManagerCreate('create')">새로만들기</div>
                     </div>
+                    
+                    <div class="mana_listItem" ng-show="_managerCreateMode == 'create'"> <!-- 기본표시 화면-->
+						<form class="form-horizontal">
+							<div class="col-xs-12 mana_listLine"><input type="text" class="form-control input-sm" placeholder="이름"></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder="성별"></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder="동기"></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder="공동체"></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder="마을"></div>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerCreate('default')">취소</button>
+							<button type="button" class="btn btn-default col-xs-6">추가</button>
+						</form>
+					</div>
                 </div>
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox" ng-repeat="list in _manageList">
-                    <div class="mana_listItem" ng-click=""> <!-- 기본표시 화면-->
+                    <div class="mana_listItem" ng-show="_managerItemMode == 'default'"> <!-- 기본표시 화면-->
 						<form class="form-horizontal">
 							<div class="col-xs-12 mana_listLine">{{list.name}}</div>
 							<div class="col-xs-6 mana_listLine">{{list.gender | getGender}}</div>
 							<div class="col-xs-6 mana_listLine">{{list.age}}동기</div>
 							<div class="col-xs-6 mana_listLine">{{list.part}}</div>
 							<div class="col-xs-6 mana_listLine">{{list.group}}</div>
-							<button type="button" class="btn btn-default col-xs-6">삭제</button>
-							<button type="button" class="btn btn-default col-xs-6">수정</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('delete')">삭제</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('modify')">수정</button>
 						</form>
 					</div>
 					
-					<div class="mana_listItem" ng-click="" ng-show="false"> <!-- 수정 화면-->
+					<div class="mana_listItem" ng-click="" ng-show="_managerItemMode == 'modify'"> <!-- 수정 화면-->
 						<form class="form-horizontal">
 							<div class="col-xs-12 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.name}}></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.gender}}></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.age}}></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.part}}></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.group}}></div>
-							<button type="button" class="btn btn-default col-xs-6">취소</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default')">취소</button>
 							<button type="button" class="btn btn-default col-xs-6">수정</button>
 						</form>
 					</div>
 					
-					<div class="mana_listItem" ng-click="" ng-show="false"> <!-- 삭제 화면-->
+					<div class="mana_listItem" ng-click="" ng-show="_managerItemMode == 'delete'"> <!-- 삭제 화면-->
 						<form class="form-horizontal">
 							<div class="col-xs-12 mana_listLineDel">'{{list.name}}' 삭제하시겠습니까?</div>
-							<button type="button" class="btn btn-default col-xs-6">취소</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default')">취소</button>
 							<button type="button" class="btn btn-default col-xs-6">확인</button>
 						</form>
 					</div>
