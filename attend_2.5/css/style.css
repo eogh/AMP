@@ -234,7 +234,7 @@ ul, ol, li{
 }
 .mana_listLine{
 	height: 32px;
-	line-height: 32px;
+/*	line-height: 32px;*/
     text-align: left;
     font-size: 15px;
 }

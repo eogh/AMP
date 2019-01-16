@@ -15,17 +15,16 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	$scope._loginInfo = ""; //우리공동체, 모두공동체, 함께공동체
     $scope._checkFlag = false; //false:예배, true:모임
     $scope._checkText = "예배";
-    $scope._checkViewTitle = "";
+    $scope._checkViewTitle = ""; //날짜 2019-01-01
 	$scope._toastText = "";
 	$scope._showToast = false;
 	$scope._showLoading = false;
 	$scope._managerViewInputText = "";
     $scope._managerCreateMode = "default"; //default, create
-    $scope._managerItemMode = "default"; //default, modify, delete
-    $scope._managerItemId = "";
     $scope._dateList = []; //날짜목록
     $scope._peopleList = []; //인원목록
     $scope._manageList = []; //관리목록
+	$scope._manageInputObj = {};
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
@@ -57,10 +56,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 				$scope.initStatisticsView();
                 break;
             case 'managerView' :
-                $scope._manageList = [];
-                $scope._managerViewInputText = "";
-                $scope._managerCreateMode = "default";
-                $scope._managerItemMode = "default";
+                $scope.managerInit();
                 break;
             default : 
                 break;
@@ -87,6 +83,26 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 			$scope._showLoading = false;
 		}
 	}
+	
+
+	$scope.formatedDate = function (date, type) {
+		var d = date, 
+			month = '' + (d.getMonth() + 1), 
+			day = '' + d.getDate(), 
+			year = d.getFullYear();
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+		
+		if(type == 1){
+			return [year, month, day].join('');
+		}else if(type == 2){
+			return [year, month, day].join('-');
+		}else{
+			return [year, month, day].join('-');
+		}
+		
+	}
+	
     //******************** loginView Function ********************//
 	
 	$scope.clicklogin = function(info) {
@@ -216,19 +232,84 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	
     //******************** managerView Function ********************//
 	
+	$scope.managerInit = function(){
+		console.log("managerInit");
+		$scope._manageList = [];
+		$scope._managerViewInputText = "";
+		$scope._managerCreateMode = "default";
+		$scope._manageInputObj = {
+			id : "",
+			name : "",
+			gender : "2",
+			age : "",
+			part : "",
+			group : "",
+			isAttend : "1",
+			created : ""
+		}
+	}
+	
     $scope.clickSearchPerson = function(input) {
 		console.log("clickSearchPerson : "+input);
 		$scope.getPerson(input);
 	}
     
-    $scope.clickManagerCreate = function(mode) {
+    $scope.clickManagerCreate = function(mode, state) {
         console.log("clickManagerCreate : "+mode);
         $scope._managerCreateMode = mode;
+		
+		if(state == "done"){
+			var idTime = $scope.formatedDate(new Date(), 1);
+			var createdTime = $scope.formatedDate(new Date(), 2);
+			
+			$scope._manageInputObj.id = idTime+"_"+$scope._manageInputObj.name;
+			$scope._manageInputObj.part = $scope._loginInfo;
+			$scope._manageInputObj.created = createdTime;
+			
+			console.log("_manageInputObj : "+JSON.stringify($scope._manageInputObj));
+			
+			$scope.createPerson($scope._manageInputObj);
+		}
     }
     
-    $scope.clickManagerItem = function(mode) {
-        console.log("clickManagerItem : "+mode);
-        $scope._managerItemMode = mode;
+	$scope.clickGenderToggle = function(data, index) {
+		if(index != null){
+			$scope._manageList[index].gender = data;
+		}else{
+			$scope._manageInputObj.gender = data;
+		}
+	}
+	
+    $scope.clickManagerItem = function(view, index, button) {
+        console.log("clickManagerItem : "+view+" | "+index);
+        var isAttend = 1;
+		
+		if(view == "modify"){
+			isAttend = 2;
+		}else if(view == "delete"){
+			isAttend = 3;
+		}else{ //default
+			isAttend = 1;
+		}
+		$scope._manageList[index].isAttend = isAttend;
+		
+		if(button != ""){
+			
+			var idTime = $scope.formatedDate(new Date(), 1);
+			var createdTime = $scope.formatedDate(new Date(), 2);
+			
+			$scope._manageInputObj.id = idTime+"_"+$scope._manageInputObj.name;
+			$scope._manageInputObj.part = $scope._loginInfo;
+			$scope._manageInputObj.created = createdTime;
+			
+			console.log("_manageInputObj : "+JSON.stringify($scope._manageInputObj));
+			
+			if(button == "modify"){
+				
+			}else if(button == "delete"){
+				$scope.deletePerson($scope._manageList[index].id);
+			}
+		}
     }
     //******************** AJAX Function ********************//
     
@@ -333,7 +414,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             }
         }).success(function(res){
             console.log("res = "+JSON.stringify(res));
-            if(res != null && res != "null"){
+            if(res != null && res != "null" && angular.isObject(res)){
                 $scope._manageList = res;
                 $scope.toastMessage("검색되었습니다.");
             }else{
@@ -346,10 +427,47 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         });
     }
     
-    $scope.setPerson = function() { //인원 한명의 정보를 추가/변경한다.
-        //추후작업
+    $scope.createPerson = function(input) { //인원 한명의 정보를 변경한다.
+        console.log("createPerson : "+input);
+        $scope.loading.start();
+		        
+        $http({
+            method: 'POST',
+            url: 'ajax/Person_CREATE.php',
+            data: input,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+			console.log("res : "+JSON.stringify(res));
+            $scope.toastMessage("추가되었습니다.");		
+			$scope.loading.stop();
+        }).error(function(e){
+			$scope.loading.stop();
+            $scope.toastMessage("추가실패하였습니다.");
+        });
     }
     
+	$scope.deletePerson = function(input) { //인원 한명을 삭제한다.
+		console.log("deletePerson : "+input);
+        $scope.loading.start();
+		        
+        $http({
+            method: 'POST',
+            url: 'ajax/Person_DELETE.php',
+            data: input,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+            $scope.toastMessage("삭제하였습니다.");		
+			$scope.loading.stop();
+        }).error(function(e){
+			$scope.loading.stop();
+            $scope.toastMessage("삭제실패하였습니다.");
+        });
+    }
+	
     //******************** Another Function ********************//
     
     $scope.showDummyData = function(flag) {
