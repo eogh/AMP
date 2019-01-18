@@ -94,6 +94,8 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		if (day.length < 2) day = '0' + day;
 		
 		if(type == 1){
+			year = year.toString();
+			year = year.substring(2,4);
 			return [year, month, day].join('');
 		}else if(type == 2){
 			return [year, month, day].join('-');
