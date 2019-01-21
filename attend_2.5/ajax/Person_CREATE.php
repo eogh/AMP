@@ -7,28 +7,19 @@
     
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
-
-//	$query="INSERT INTO peoplem (id, name, gender, age, part, group, isAttend, created)
-//			VALUES ('190101_Á¶´ëÈ£', 'Á¶´ëÈ£', 1, 90, '¸ðµÎ°øµ¿Ã¼', '´ëÈ£¸¶À»', 1, '2019-01-01');";
-
-//			VALUES ('".$request->id."', '".$request->name."', '".$request->gender."', '".$request->age."', '".$request->part."', '".$request->group."', '1', '".$request->created."')";
-    
-//	$query="INSERT INTO peoplem SET 
-//			id='".$request->id."'
-//			name='".$request->name."'
-//			gender='".$request->gender."'
-//			age='".$request->age."'
-//			part='".$request->part."'
-//			group='".$request->group."'
-//			isAttend='".$request->isAttend."'
-//			created='".$request->created."'";
 	
-//	$query="INSERT INTO peoplem (id, name, gender, age, part, group, isAttend, created) VALUES ('190117_Á¶´ëÈ£', 'Á¶´ëÈ£', '1', '90', '¸ðµÎ°øµ¿Ã¼', '´ëÈ£¸¶À»', '1', '2019-01-17')";
-	$query="INSERT INTO peoplem (id, name, gender, age, part, group, isAttend, created) VALUES ('190119_Á¶´ëÈ£', 'Á¶´ëÈ£', '1', '91', '¸ðµÎ°øµ¿Ã¼', '´ëÈ£¸¶À»', '1', '2019-01-18')";
+	//groupëŠ” sqlë¬¸ì—ì„œ ì‚¬ìš©í•˜ëŠ” ëª…ë ¹ì–´ì™€ ê²¹ì¹˜ë¯€ë¡œ ``ë¬¶ìŒ(2019.1.21)
+	$query="INSERT INTO peopleM SET 
+			id='".$request->id."'
+			name='".$request->name."'
+			gender='".$request->gender."'
+			age='".$request->age."'
+			part='".$request->part."'
+			`group`='".$request->group."'
+			isAttend='".$request->isAttend."'
+			created='".$request->created."'";
 
-//	$query="INSERT INTO attend_2019 (id, part, check1, check2, date) VALUES ('190117_Á¶´ëÈ£','¸ðµÎ°øµ¿Ã¼','0','0','2019-01-17')";
-		
-	
+
     if (mysqli_query($con, $query)) {
     	echo "New record created successfully";
 	} else {

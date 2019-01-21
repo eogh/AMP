@@ -8,7 +8,7 @@
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
 
-	$query="INSERT INTO peoplem (id, name, gender, age, part, group, isAttend, created) VALUES ('".$request->id."', '".$request->name."', '".$request->gender."', '".$request->age."', '".$request->part."', '".$request->group."', '1', '".$request->created."');";
+	$query="INSERT INTO peopleM (id, name, gender, age, part, group, isAttend, created) VALUES ('".$request->id."', '".$request->name."', '".$request->gender."', '".$request->age."', '".$request->part."', '".$request->group."', '1', '".$request->created."');";
         
     mysqli_query($con, $query);
 
