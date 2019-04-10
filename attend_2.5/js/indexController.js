@@ -120,7 +120,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		
         var dateString = JSON.stringify($scope._dateList);
         var dateIdx = dateString.indexOf(day);
-        var week = nowDate.getDay();
+        var week = new Date(day).getDay();
         
         if(dateIdx === -1) { //이미 존재하는 날짜가 있는지 확인한다.
             if(week === 0) { //일요일이 아닌날에 생성하지 않도록 한다.
