@@ -51,7 +51,7 @@ ul, ol, li{
 .mainTitle{
     color:#000;
     font-size: 18px;
-    text-shadow: 0.5px 0.5px lightgray;
+/*    text-shadow: 0.5px 0.5px lightgray;*/
 }
 
 .subTitle{
@@ -86,7 +86,7 @@ ul, ol, li{
     margin-bottom: 5px;
     padding: 2px 0px 2px 10px;
     color: white;
-    text-shadow: 0.5px 0.5px black;
+/*    text-shadow: 0.5px 0.5px black;*/
     background-color:dodgerblue;
     box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.1);
 }
@@ -101,10 +101,9 @@ ul, ol, li{
 .listItem{
     height: 27px;
     line-height: 27px;
-    background-color: rgba(200,200,200,0.1);
-    border: 1px solid white;
+    background-color: whitesmoke;
+    border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 1px 1px #aaa;
 }
 
 .listIcon{
@@ -114,7 +113,7 @@ ul, ol, li{
     margin-top: 5px;
     text-align: left;
     color: dodgerblue;
-    text-shadow: 0.5px 0.5px gray;
+/*    text-shadow: 0.5px 0.5px gray;*/
 }
 .listDivider{
     position: absolute;
@@ -122,7 +121,7 @@ ul, ol, li{
     height: 60%;
     margin-top: 2px;
     margin-left: 28px;
-    background-color: rgba(50,50,50,0.1);
+    background-color: lightgray;
 }
 .listName{
     text-align: center;
@@ -164,10 +163,10 @@ ul, ol, li{
 #createItem{
     height: 27px;
     line-height: 27px;
-    background-color: rgba(200,200,200,0.1);
-    border: 1px dashed gray;
+    background-color: whitesmoke;
+    border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 1px 1px #aaa;
+/*    box-shadow: 1px 1px #aaa;*/
 }
 
 #createList{
@@ -215,10 +214,10 @@ ul, ol, li{
 #mana_CreateItem{
     height: 132px;
     line-height: 132px;
-    background-color: rgba(200,200,200,0.1);
-    border: 1px dashed gray;
+    background-color: whitesmoke;
+    border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 1px 1px #aaa;
+/*    box-shadow: 1px 1px #aaa;*/
 }
 #mana_CreateName{
     text-align: center;
@@ -226,10 +225,10 @@ ul, ol, li{
 }
 .mana_listItem{
 	height: 137px;
-    background-color: rgba(200,200,200,0.1);
-    border: 1px solid white;
+    background-color: whitesmoke;
+    border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 1px 1px #aaa;
+/*    box-shadow: 1px 1px #aaa;*/
     padding-top: 5px;
 }
 .mana_listLine{
@@ -265,7 +264,7 @@ ul, ol, li{
 .footerSelected{
     background-color: dodgerblue;
     color: white;
-    text-shadow: 0.5px 0.5px black;
+/*    text-shadow: 0.5px 0.5px black;*/
 }
 
 .naviText{
@@ -285,8 +284,7 @@ ul, ol, li{
     font-size: 11px;
     color:white;
     border-radius: 5px;
-    box-shadow: 2px 2px gray;
-    background-color: rgba(0,0,0,0.8);
+    background-color: dimgray;
 }
 /********** loading **********/
 .load {
