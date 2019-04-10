@@ -13,7 +13,7 @@
     
 //    $result = mysqli_query($con, "select * FROM people AS p LEFT JOIN attendance".$part." AS a ON p.id = a.id WHERE a.date = '".$day."' ORDER BY p.group");
 
-    $result = mysqli_query($con, "select id FROM peopleM WHERE part ='".$part."' ORDER BY id ASC");
+    $result = mysqli_query($con, "select id FROM peoplem WHERE part ='".$part."' ORDER BY id ASC");
 
     $query.= "INSERT INTO attend_2019 (id, part, check1, check2, date) VALUES "; 
 

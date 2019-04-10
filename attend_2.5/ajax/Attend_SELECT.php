@@ -11,7 +11,7 @@
     $day = $postObj->day;
     $part = $postObj->part;
     
-    $result = mysqli_query($con, "select * FROM peopleM AS p LEFT JOIN attend_2019 AS a ON p.id = a.id WHERE a.date = '".$day."' and a.part= '".$part."' ORDER BY p.group");
+    $result = mysqli_query($con, "select * FROM peoplem AS p LEFT JOIN attend_2019 AS a ON p.id = a.id WHERE a.date = '".$day."' and a.part= '".$part."' ORDER BY p.group");
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
