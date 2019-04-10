@@ -216,7 +216,7 @@
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 mana_listBox">
                     <div id="mana_CreateItem" ng-show="_managerCreateMode == 'default'">
-                        <div id="mana_CreateName" ng-click="clickManagerCreate('create')">새로만들기</div>
+                        <div id="mana_CreateName" ng-click="clickManagerCreate('create', 'default')">새로만들기</div>
                     </div>
                     
                     <div class="mana_listItem" ng-show="_managerCreateMode == 'create'"> <!-- 기본표시 화면-->
@@ -228,10 +228,10 @@
 									<label class="btn btn-default btn-sm" ng-class="{'active' : _manageInputObj.gender == '1'}" ng-click="clickGenderToggle('1')">남자</label>
 								</div>
 							</div>
-							<div class="col-xs-6 mana_listLine"><input type="number" class="form-control input-sm" ng-model="_manageInputObj.age" placeholder="동기 ex)90"></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" ng-model="_manageInputObj.age" placeholder="동기 ex)90"></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{_loginInfo}} disabled></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" ng-model="_manageInputObj.group" placeholder="마을 ex)대호마을"></div>
-							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerCreate('default')">취소</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerCreate('default', 'cancel')">취소</button>
 							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerCreate('default', 'done')">추가</button>
 						</form>
 					</div>
@@ -245,8 +245,8 @@
 							<div class="col-xs-6 mana_listLine">{{list.age}}동기</div>
 							<div class="col-xs-6 mana_listLine">{{list.part}}</div>
 							<div class="col-xs-6 mana_listLine">{{list.group}}</div>
-							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('delete', $index)">삭제</button>
-							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('modify', $index)">수정</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('delete', $index, 'default')">삭제</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('modify', $index, 'default')">수정</button>
 						</form>
 					</div>
 					
@@ -259,10 +259,10 @@
 									<label class="btn btn-default btn-sm" ng-class="{'active' : list.gender == '1'}" ng-click="clickGenderToggle('1', $index)">남자</label>
 								</div>
 							</div>
-							<div class="col-xs-6 mana_listLine"><input type="number" class="form-control input-sm" ng-model="_manageInputObj.age" placeholder={{list.age}}></div>
+							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" ng-model="_manageInputObj.age" placeholder={{list.age}}></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" placeholder={{list.part}} disabled></div>
 							<div class="col-xs-6 mana_listLine"><input type="text" class="form-control input-sm" ng-model="_manageInputObj.group" placeholder={{list.group}}></div>
-							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index)">취소</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index, 'cancel')">취소</button>
 							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index, 'modify')">수정</button>
 						</form>
 					</div>
@@ -270,7 +270,7 @@
 					<div class="mana_listItem" ng-click="" ng-show="list.isAttend == '3'"> <!-- 삭제 화면-->
 						<form class="form-horizontal">
 							<div class="col-xs-12 mana_listLineDel">'{{list.name}}' 삭제하시겠습니까?</div>
-							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index)">취소</button>
+							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index, 'cancel')">취소</button>
 							<button type="button" class="btn btn-default col-xs-6" ng-click="clickManagerItem('default', $index, 'delete')">확인</button>
 						</form>
 					</div>

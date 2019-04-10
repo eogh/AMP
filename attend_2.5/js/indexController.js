@@ -255,7 +255,25 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 			created : ""
 		}
 	}
-	
+    
+	$scope.managerDefaultState = function(){
+        console.log("managerDefaultState");
+        $scope._managerCreateMode = "default";
+        for(var i=0; i<$scope._manageList.length; i++){
+            $scope._manageList[i].isAttend = "1";
+        }
+        $scope._manageInputObj = {
+			id : "",
+			name : "",
+			gender : "2",
+			age : "",
+			part : "",
+			group : "",
+			isAttend : "1",
+			created : ""
+		}
+    }
+    
     $scope.clickSearchPerson = function(input) {
 		console.log("clickSearchPerson : "+input);
 		$scope.getPerson(input);
@@ -263,6 +281,12 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.clickManagerCreate = function(mode, state) {
         console.log("clickManagerCreate : "+mode);
+        var emptyValue = false;
+        
+        if(state == "default"){
+            $scope.managerDefaultState();
+        }
+        
         $scope._managerCreateMode = mode;
 		
 		if(state == "done"){
@@ -275,8 +299,25 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 			
 			console.log("_manageInputObj : "+JSON.stringify($scope._manageInputObj));
 			
-			$scope.createPerson($scope._manageInputObj);
-		}
+            angular.forEach($scope._manageInputObj, function(key, value){
+                if($scope._manageInputObj[value] == ""){
+                    console.log("key : "+value+" value : "+$scope._manageInputObj[value]);
+                    emptyValue = true;
+                }
+            });
+            
+            if(emptyValue === false){
+                $scope.createPerson($scope._manageInputObj);
+                $scope.managerInit();
+            }else{
+                $scope.toastMessage("빈칸이 있으면 안됩니다");
+                $scope._managerCreateMode = "create";
+            }
+		}else if(state == "cancel"){
+            
+        }else if(state == "default"){
+            
+        }
     }
     
 	$scope.clickGenderToggle = function(data, index) {
@@ -289,8 +330,12 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 	
     $scope.clickManagerItem = function(view, index, button) {
         console.log("clickManagerItem : "+view+" | "+index);
+        
+        if(button == "default"){
+            $scope.managerDefaultState();
+        }
+        
         var isAttend = 1;
-		
 		if(view == "modify"){
 			isAttend = 2;
 		}else if(view == "delete"){
@@ -300,23 +345,22 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		}
 		$scope._manageList[index].isAttend = isAttend;
 		
-		if(button != ""){
-			
-			var idTime = $scope.formatedDate(new Date(), 1);
-			var createdTime = $scope.formatedDate(new Date(), 2);
-			
-			$scope._manageInputObj.id = idTime+"_"+$scope._manageInputObj.name;
-			$scope._manageInputObj.part = $scope._loginInfo;
-			$scope._manageInputObj.created = createdTime;
-			
-			console.log("_manageInputObj : "+JSON.stringify($scope._manageInputObj));
-			
-			if(button == "modify"){
-				
-			}else if(button == "delete"){
-				$scope.deletePerson($scope._manageList[index].id);
-			}
-		}
+        console.log("managerList = "+JSON.stringify($scope._manageList[index]));
+        console.log("_manageInputObj = "+JSON.stringify($scope._manageInputObj));
+        
+        if(button == "modify"){
+            $scope._manageList[index] = $scope._manageInputObj;
+            $scope.modifyPerson($scope._manageList[index]);
+            $scope.managerInit();
+        }else if(button == "delete"){
+            $scope._manageList[index] = $scope._manageInputObj;
+            $scope.deletePerson($scope._manageList[index].id);
+            $scope.managerInit();
+        }else if(button == "cancel"){
+
+        }else if(button == "default"){
+            angular.copy($scope._manageList[index], $scope._manageInputObj); //링크x 값복사
+        }
     }
     //******************** AJAX Function ********************//
     
@@ -435,7 +479,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     }
     
     $scope.createPerson = function(input) { //인원 한명의 정보를 변경한다.
-        console.log("createPerson : "+input);
+        console.log("createPerson : "+JSON.stringify(input));
         $scope.loading.start();
 		        
         $http({
@@ -447,11 +491,40 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
             }
         }).success(function(res){
 			console.log("res : "+JSON.stringify(res));
-            $scope.toastMessage("추가되었습니다.");		
-			$scope.loading.stop();
+            if(res == "successfully"){
+                $scope.toastMessage("추가되었습니다.");
+            }else{
+                $scope.toastMessage("추가실패하였습니다.");
+            }
+            $scope.loading.stop();
         }).error(function(e){
 			$scope.loading.stop();
             $scope.toastMessage("추가실패하였습니다.");
+        });
+    }
+    
+    $scope.modifyPerson = function(input) { //인원 한명의 정보를 변경한다.
+        console.log("modifyPerson : "+JSON.stringify(input));
+        $scope.loading.start();
+		        
+        $http({
+            method: 'POST',
+            url: 'ajax/Person_UPDATE.php',
+            data: input,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function(res){
+			console.log("res : "+JSON.stringify(res));
+            if(res == "successfully"){
+                $scope.toastMessage("수정되었습니다.");
+            }else{
+                $scope.toastMessage("수정실패하였습니다.");
+            }
+            $scope.loading.stop();
+        }).error(function(e){
+			$scope.loading.stop();
+            $scope.toastMessage("수정실패하였습니다.");
         });
     }
     
