@@ -72,7 +72,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope._showToast = true;
         $timeout(function() {
             $scope._showToast = false;
-        }, 2000);
+        }, 1000);
     }
 	
 	$scope.loading = {
@@ -120,12 +120,17 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
 		
         var dateString = JSON.stringify($scope._dateList);
         var dateIdx = dateString.indexOf(day);
+        var week = nowDate.getDay();
         
-        if(dateIdx === -1) {
-            var sCallback = function() {
-                $scope.SELECT_Attend(day);
+        if(dateIdx === -1) { //이미 존재하는 날짜가 있는지 확인한다.
+            if(week === 0) { //일요일이 아닌날에 생성하지 않도록 한다.
+                var sCallback = function() {
+                    $scope.SELECT_Attend(day);
+                }
+                $scope.CREATE_Attend(day, sCallback);
+            } else {
+                $scope.toastMessage("주일에만 만들 수 있습니다.");
             }
-            $scope.CREATE_Attend(day, sCallback);
         } else {
             $scope.toastMessage("이미 생성되어 있습니다.");
         }
