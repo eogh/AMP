@@ -10,7 +10,7 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     
     $scope.nowDate = Date.now();
     $scope._screen = "coldStart"; //default :: coldStart
-	$scope._dummyData = false; //크롬 테스트용 test
+	$scope._dummyData = false; //크롬 테스트용 test2
     
 	$scope._loginInfo = ""; //우리공동체, 모두공동체, 함께공동체
     $scope._checkFlag = false; //false:예배, true:모임
