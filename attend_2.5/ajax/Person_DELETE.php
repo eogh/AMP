@@ -9,7 +9,7 @@
 
     $result = mysqli_query($con, "delete FROM peoplem  WHERE id ='".$postdata."'");
 
-	echo $result;
+    echo $result;
 
     mysqli_close($con);
 ?>
