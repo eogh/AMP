@@ -118,6 +118,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
         $scope.showScreen("loadView");
     }
     
+    $scope.reloadPage = function() {
+        console.log("click reloadPage");
+        window.location.reload();
+    }
     //******************** loadView Function ********************//
     
     $scope.clickCreateAttend = function(day) {
