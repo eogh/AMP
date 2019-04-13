@@ -115,6 +115,17 @@ ul, ol, li{
     color: dodgerblue;
 /*    text-shadow: 0.5px 0.5px gray;*/
 }
+
+.listIconR{
+    float: right;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-top: 5px;
+    text-align: left;
+    color: dodgerblue;
+/*    text-shadow: 0.5px 0.5px gray;*/
+}
+
 .listDivider{
     position: absolute;
     width: 1px;
@@ -189,6 +200,23 @@ ul, ol, li{
 #mainView{
     width: 100%;
     height: 100%;
+}
+.main_listBox{
+    height: 50px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.main_listItem{
+    height: 40px;
+    line-height: 40px;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.main_listName{
+    text-align: center;
+    font-size: 22px;
 }
 /********** statisticsView **********/
 #statisticsView{

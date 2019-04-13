@@ -25,6 +25,10 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     $scope._peopleList = []; //인원목록
     $scope._manageList = []; //관리목록
     $scope._manageInputObj = {};
+    $scope._uriInputText = "";
+    $scope._uriInputNum = null;
+    $scope._uriAddList = []; //우리두리 추가인원목록
+    $scope._uriList = []; //우리두리 인원목록
     
     $scope.onload = function () {
         //init : 앱이 실행됬을 때 최초로 실행되는 부분
@@ -192,6 +196,63 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
     }
     
     //******************** mainView Function ********************//
+    
+    $scope.clickAddPerson = function(input) {
+        console.log("input : "+ input);
+        
+        $scope._uriAddList.push(input);
+        
+        $scope._uriInputText = "";
+    }
+    
+    $scope.clickSortPeople = function() {
+        console.log("_uriInputNum : "+$scope._uriInputNum);
+        
+        if($scope._uriInputNum == null){
+            $scope.toastMessage("인원수를 선택해주세요");
+            return;
+        }
+        
+        var tempArr = [];
+        var tempText = "";
+        var bindNum = 0;
+        $scope._uriList = [];
+        
+        angular.copy($scope._uriAddList, tempArr); //추가명단을 tempArr복사한다.
+        
+        for(var i=0; i<$scope._peopleList.length; i++){ //모임에 온 청년을 tempArr에 추가한다.
+            if($scope._peopleList[i].check2 == "1"){
+                tempArr.push($scope._peopleList[i].name);
+            }
+        }
+        
+        shuffle(tempArr); //tempArr에 추가된 명단을 섞는다.
+        
+        for(var i=0; i<tempArr.length; i++){
+            if(bindNum < $scope._uriInputNum - 1){
+                tempText += tempArr[i] + ", ";
+                bindNum++;
+            }else{
+                tempText += tempArr[i];
+                $scope._uriList.push(tempText);
+                tempText = "";
+                bindNum = 0;
+            }
+        }
+        if(tempText != ""){
+            $scope._uriList.push(tempText);
+        }
+        
+        console.log("$scope._uriList : "+JSON.stringify($scope._uriList));
+//        angular.copy(tempArr, $scope._uriList); //tempArr를 uriList에 복사한다.
+    }
+    
+    $scope.clickDelPerson = function(index) {
+        console.log("index : "+$scope._uriAddList[index]);
+        
+        $scope._uriAddList.splice(index, 1);
+    }
+    
     //******************** statisticsView Function ********************//
     
     $scope.initStatisticsView = function() {
@@ -561,6 +622,16 @@ ampApp.controller('ampCtrl', function ($scope, $timeout, $http) {
                                       {id:"180101_차재능",name:"차재능",gender:"1",age:"91",part:"모두공동체",group:"지애마을",isAttend:"1",created:"2018-01-01",check1:"0",check2:"0",date:"2018-01-01"}
                                      ];
             $scope._dateList = [{date:"2018-01-01"}, {date:"2018-01-03"}, {date:"2018-01-08"}];
+        }
+    }
+    
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i -= 1) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
         }
     }
 });

@@ -137,13 +137,42 @@
             </div>
 
             <!-- Body Area -->
-            <div class="outer">
-                <div class="inner">
-                    <div class="centered">
-                        <p>페이지 공사중</p>
+            <div class="viewBody">
+                
+                <div class="mana_inputBox">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="_uriInputText" placeholder="이름을 입력하세요.">
+                                <div class="input-group-addon" ng-click="clickAddPerson(_uriInputText)">추가</div>
+                            </div>
+                            <select class="form-control" ng-model="_uriInputNum">
+                                <option value="">-인원수-</option>
+                                <option value="2">2명씩</option>
+                                <option value="3">3명씩</option>
+                                <option value="4">4명씩</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-default" ng-click="clickSortPeople()">우리두리 실행</button>
+                    </form>
+                </div>
+                
+                <div class="listTitle">추가인원</div>
+                <div class="col-xs-6 col-sm-2 col-md-2 listBox" ng-repeat="list in _uriAddList track by $index">
+                    <div class="listItem">
+                        <span class="glyphicon glyphicon-remove listIconR" aria-hidden="true" ng-click="clickDelPerson($index)"></span>
+                        <div class="load_listName">{{list}}</div>
                     </div>
                 </div>
+                <div class="listTitle">우리두리</div>
+                <div class="col-xs-6 col-sm-4 col-md-4 main_listBox" ng-repeat="list in _uriList track by $index">
+                    <div class="main_listItem">
+                        <div class="main_listName">{{list}}</div>
+                    </div>
+                </div>
+                
             </div>
+            
         </div>
         
         
