@@ -10,7 +10,7 @@
     
     
     //group는 sql문에서 사용하는 명령어와 겹치므로 ``묶음(2019.1.21)
-    $query.="INSERT INTO peoplem (id, name, gender, age, part, `group`, isAttend, created) VALUES ";
+    $query.="INSERT INTO people_2020 (id, name, gender, age, part, `group`, isAttend, created) VALUES ";
 
     $query.="('".$request->id."', '".$request->name."', '".$request->gender."', '".$request->age."', '".$request->part."', '".$request->group."', '".$request->isAttend."', '".$request->created."')";
 

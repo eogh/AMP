@@ -10,7 +10,7 @@
     
     
     //group? sql??? ???? ???? ???? ``??(2019.1.21)
-    $query.="UPDATE peoplem SET name='".$request->name."', gender='".$request->gender."', age='".$request->age."', part='".$request->part."', `group`='".$request->group."' WHERE id='".$request->id."'";
+    $query.="UPDATE people_2020 SET name='".$request->name."', gender='".$request->gender."', age='".$request->age."', part='".$request->part."', `group`='".$request->group."' WHERE id='".$request->id."'";
 
     if (mysqli_query($con, $query)) {
         echo "successfully";

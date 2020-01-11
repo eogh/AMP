@@ -7,7 +7,7 @@
     
     $postdata = file_get_contents("php://input");
 
-    $result = mysqli_query($con, "delete FROM peoplem  WHERE id ='".$postdata."'");
+    $result = mysqli_query($con, "delete FROM people_2020  WHERE id ='".$postdata."'");
 
     echo $result;
 

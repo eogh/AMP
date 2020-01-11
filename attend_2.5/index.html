@@ -91,11 +91,11 @@
             <div class="viewBody" ng-hide="_checkFlag">
                 <div ng-repeat="(key, value) in _peopleList | groupBy: 'group'">
                     <div class="listTitle">{{ key }}</div>
-                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check1', _peopleList.id)">
+                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'age'" ng-click="clickCheckAttend('check1', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check1 == '1'"></span>
                             <div class="listDivider"></div>
-                            <div class="listName">{{_peopleList.name}}</div>
+                            <div class="listName">{{_peopleList.age}}{{_peopleList.name}}</div>
                         </div>
                     </div>
                 </div>
@@ -104,11 +104,11 @@
             <div class="viewBody" ng-show="_checkFlag">
                 <div ng-repeat="(key, value) in _peopleList | groupBy: 'group'">
                     <div class="listTitle">{{ key }}</div>
-                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'name'" ng-click="clickCheckAttend('check2', _peopleList.id)">
+                    <div class="col-xs-4 col-sm-2 col-md-2 listBox" ng-repeat="_peopleList in value | orderBy:'age'" ng-click="clickCheckAttend('check2', _peopleList.id)">
                         <div class="listItem">
                             <span class="glyphicon glyphicon-check listIcon" aria-hidden="true" ng-show="_peopleList.check2 == '1'"></span>
                             <div class="listDivider"></div>
-                            <div class="listName">{{_peopleList.name}}</div>
+                            <div class="listName">{{_peopleList.age}}{{_peopleList.name}}</div>
                         </div>
                     </div>
                 </div>

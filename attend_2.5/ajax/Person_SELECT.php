@@ -7,7 +7,7 @@
     
     $postdata = file_get_contents("php://input");
 
-    $result = mysqli_query($con, "select * FROM peoplem  WHERE name LIKE '%".$postdata."%'");
+    $result = mysqli_query($con, "select * FROM people_2020  WHERE name LIKE '%".$postdata."%'");
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
